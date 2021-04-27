@@ -19,10 +19,10 @@ public class CalendarController {
     @Autowired
     private CalendarService calendarService;
 
-   /*@PostMapping
-    public Mono<EventCalendar> saveEventKR(@RequestBody EventCalendar evento) throws IOException, GeneralSecurityException {
-       return calendarService.save(evento);
-    }*/
+    @PostMapping
+    public Mono<Event> saveEventKR(@RequestBody EventCalendar eventCalendar) throws IOException, GeneralSecurityException {
+       return calendarService.save(eventCalendar);
+    }
 
 
     @GetMapping("/list")
