@@ -1,4 +1,6 @@
 package co.com.sofka.okrs.controller.calendar;
+import co.com.sofka.okrs.service.calendar.*;
+
 
 import com.google.api.services.calendar.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +12,20 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 @RestController
-@RequestMapping("calendar")
+@RequestMapping("/calendar")
 public class CalendarController {
-@Autowired
-CalendarService calendarService;
 
-    @PostMapping
-    public Mono<EventCalendar> guardar(@RequestBody Evento evento) throws IOException, GeneralSecurityException {
+    @Autowired
+    private CalendarService calendarService;
+
+   @PostMapping
+    public Mono<EventCalendar> saveEventKR(@RequestBody Evento evento) throws IOException, GeneralSecurityException {
        return calendarService.save(evento);
     }
 
-    @GetMapping
-    public Flux<Event> leer() throws IOException, GeneralSecurityException {
+
+    @GetMapping("/list")
+    public Flux<Event> loadCalendar() throws IOException, GeneralSecurityException {
         return calendarService.load();
     }
 
