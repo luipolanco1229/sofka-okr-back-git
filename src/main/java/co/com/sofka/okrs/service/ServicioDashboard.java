@@ -1,2 +1,4 @@
-package co.com.sofka.okrs.service;public class ServicioDashboard {
+package co.com.sofka.okrs.service;
+
+public class ServicioDashboard {
 }
