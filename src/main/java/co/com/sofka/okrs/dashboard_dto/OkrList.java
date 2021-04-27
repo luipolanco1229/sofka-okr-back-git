@@ -1,4 +1,4 @@
-package co.com.sofka.okrs.domain;
+package co.com.sofka.okrs.dashboard_dto;
 
 public class OkrList {
 
