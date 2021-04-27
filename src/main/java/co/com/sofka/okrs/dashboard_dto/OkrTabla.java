@@ -9,7 +9,7 @@ public class OkrTabla {
     private String titulo;
     private String objetivo;
     private String nombreResponsableOkr;
-    private Flux<KrTabla> resultadosClaves;
+    private List<KrTabla> resultadosClaves;
 
     public OkrTabla(String titulo, String objetivo, String nombreResponsableOkr) {
         this.titulo = titulo;
@@ -41,11 +41,11 @@ public class OkrTabla {
         this.nombreResponsableOkr = nombreResponsableOkr;
     }
 
-    public Flux<KrTabla> getResultadosClaves() {
+    public List<KrTabla> getResultadosClaves() {
         return resultadosClaves;
     }
 
-    public void setResultadosClaves(Flux<KrTabla> resultadosClaves) {
+    public void setResultadosClaves(List<KrTabla> resultadosClaves) {
         this.resultadosClaves = resultadosClaves;
     }
 }
