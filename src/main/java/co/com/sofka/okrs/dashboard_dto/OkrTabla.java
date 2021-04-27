@@ -1,5 +1,7 @@
 package co.com.sofka.okrs.dashboard_dto;
 
+import reactor.core.publisher.Flux;
+
 import java.util.List;
 
 public class OkrTabla {
@@ -7,13 +9,12 @@ public class OkrTabla {
     private String titulo;
     private String objetivo;
     private String nombreResponsableOkr;
-    private List<KrTabla> resultadosClaves;
+    private Flux<KrTabla> resultadosClaves;
 
-    public OkrTabla(String titulo, String objetivo, String nombreResponsableOkr, List<KrTabla> resultadosClaves) {
+    public OkrTabla(String titulo, String objetivo, String nombreResponsableOkr) {
         this.titulo = titulo;
         this.objetivo = objetivo;
         this.nombreResponsableOkr = nombreResponsableOkr;
-        this.resultadosClaves = resultadosClaves;
     }
 
     public String getTitulo() {
@@ -40,11 +41,11 @@ public class OkrTabla {
         this.nombreResponsableOkr = nombreResponsableOkr;
     }
 
-    public List<KrTabla> getResultadosClaves() {
+    public Flux<KrTabla> getResultadosClaves() {
         return resultadosClaves;
     }
 
-    public void setResultadosClaves(List<KrTabla> resultadosClaves) {
+    public void setResultadosClaves(Flux<KrTabla> resultadosClaves) {
         this.resultadosClaves = resultadosClaves;
     }
 }
