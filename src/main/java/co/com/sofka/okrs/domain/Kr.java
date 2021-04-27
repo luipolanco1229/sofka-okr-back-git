@@ -4,33 +4,33 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "Kr")
 public class Kr {
     @Id
     private String id;
-    private String title;
-    private Float percentageWeight;
-    private String responsible;
-    private String mail;
+    private String okrId;
+    private String keyResult;
+    private String personInChargeNameKr;
+    private String personInChargeEmailKr;
     private Date startDate;
     private Date finishDate;
-    private List<UpdatePercentegeKr> updatePercentegeKr;
-    private String  description;
+    private Float advanceKr;
+    private Float percentageWeight;
+    private String descriptionKr;
 
-
-    public Kr(String id, String title, Float percentageWeight, String responsible, String mail,
-                      List<UpdatePercentegeKr> updatePercentegeKr, String description) {
+    public Kr(String id, String okrId, String keyResult, String personInChargeNameKr, String personInChargeEmailKr,
+              Float advanceKr, Float percentageWeight, String descriptionKr) {
         this.id = id;
-        this.title = title;
+        this.okrId = okrId;
+        this.keyResult = keyResult;
+        this.personInChargeNameKr = personInChargeNameKr;
+        this.personInChargeEmailKr = personInChargeEmailKr;
+        this.startDate = new Date();
+        this.finishDate = new Date();
+        this.advanceKr = advanceKr;
         this.percentageWeight = percentageWeight;
-        this.responsible = responsible;
-        this.mail = mail;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
-        this.updatePercentegeKr = updatePercentegeKr;
-        this.description = description;
+        this.descriptionKr = descriptionKr;
     }
 
     public String getId() {
@@ -41,12 +41,60 @@ public class Kr {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getOkrId() {
+        return okrId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOkrId(String okrId) {
+        this.okrId = okrId;
+    }
+
+    public String getKeyResult() {
+        return keyResult;
+    }
+
+    public void setKeyResult(String keyResult) {
+        this.keyResult = keyResult;
+    }
+
+    public String getPersonInChargeNameKr() {
+        return personInChargeNameKr;
+    }
+
+    public void setPersonInChargeNameKr(String personInChargeNameKr) {
+        this.personInChargeNameKr = personInChargeNameKr;
+    }
+
+    public String getPersonInChargeEmailKr() {
+        return personInChargeEmailKr;
+    }
+
+    public void setPersonInChargeEmailKr(String personInChargeEmailKr) {
+        this.personInChargeEmailKr = personInChargeEmailKr;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public Float getAdvanceKr() {
+        return advanceKr;
+    }
+
+    public void setAdvanceKr(Float advanceKr) {
+        this.advanceKr = advanceKr;
     }
 
     public Float getPercentageWeight() {
@@ -57,44 +105,11 @@ public class Kr {
         this.percentageWeight = percentageWeight;
     }
 
-    public String getResponsible() {
-        return responsible;
+    public String getDescriptionKr() {
+        return descriptionKr;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+    public void setDescriptionKr(String descriptionKr) {
+        this.descriptionKr = descriptionKr;
     }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getFinishDate() {
-        return finishDate;
-    }
-
-    public List<UpdatePercentegeKr> getUpdatePercentegeKr() {
-        return updatePercentegeKr;
-    }
-
-    public void setUpdatePercentegeKr(List<UpdatePercentegeKr> updatePercentegeKr) {
-        this.updatePercentegeKr = updatePercentegeKr;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }

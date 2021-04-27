@@ -16,7 +16,6 @@ public class ServiceOkr {
         return repositoryOKr.save(okr);
     }
 
-
     public Flux<Okr> findAll() {
         return repositoryOKr.findAll();
     }

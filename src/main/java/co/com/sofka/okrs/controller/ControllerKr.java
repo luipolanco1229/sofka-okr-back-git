@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/Kr")
+@RequestMapping("/Krs")
 public class ControllerKr {
     @Autowired
     private ServiceKr serviceKr;

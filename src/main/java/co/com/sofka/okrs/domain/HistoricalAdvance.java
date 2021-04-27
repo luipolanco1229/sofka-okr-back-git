@@ -4,13 +4,13 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
-public class UpdatePercentegeOkr {
+public class HistoricalAdvance {
     @Id
     private String id;
     private Float updatePercentegeOkr;
     private Date updateDate;
 
-    public UpdatePercentegeOkr(String id, Float updatePercentegeOkr) {
+    public HistoricalAdvance(String id, Float updatePercentegeOkr) {
         this.id = id;
         this.updatePercentegeOkr = updatePercentegeOkr;
         this.updateDate = new Date();

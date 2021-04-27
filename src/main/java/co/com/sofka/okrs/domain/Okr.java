@@ -12,26 +12,28 @@ public class Okr {
     private String id;
     private String title;
     private String objective;
+    private String personInChargeNameOkr;
+    private String personInChargeEmailOkr;
+    private String userId;
+    private String descriptionOkr;
     private String vertical;
-    private List<Kr> keyResults;
     private Date startDate;
-    private String responsible;
-    private String mail;
-    private String  description;
-    private List<UpdatePercentegeOkr>  updatePercentegeOkr;
+    private Float advanceOkr;
+    private List<HistoricalAdvance> historicalOkr;
 
-    public Okr(String id, String title, String objective, String vertical, List<Kr> keyResults, String responsible,
-                String mail, String description, List<UpdatePercentegeOkr> updatePercentegeOkr) {
+    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String descriptionOkr, String vertical,
+               Float advanceOkr, List<HistoricalAdvance> historicalOkr, String userId) {
         this.id = id;
         this.title = title;
         this.objective = objective;
+        this.personInChargeNameOkr = personInChargeNameOkr;
+        this.personInChargeEmailOkr = personInChargeEmailOkr;
+        this.descriptionOkr = descriptionOkr;
         this.vertical = vertical;
-        this.keyResults = keyResults;
         this.startDate = new Date();
-        this.responsible = responsible;
-        this.mail = mail;
-        this.description = description;
-        this.updatePercentegeOkr = updatePercentegeOkr;
+        this.advanceOkr = advanceOkr;
+        this.historicalOkr = historicalOkr;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -58,6 +60,38 @@ public class Okr {
         this.objective = objective;
     }
 
+    public String getPersonInChargeNameOkr() {
+        return personInChargeNameOkr;
+    }
+
+    public void setPersonInChargeNameOkr(String personInChargeNameOkr) {
+        this.personInChargeNameOkr = personInChargeNameOkr;
+    }
+
+    public String getPersonInChargeEmailOkr() {
+        return personInChargeEmailOkr;
+    }
+
+    public void setPersonInChargeEmailOkr(String personInChargeEmailOkr) {
+        this.personInChargeEmailOkr = personInChargeEmailOkr;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDescriptionOkr() {
+        return descriptionOkr;
+    }
+
+    public void setDescriptionOkr(String descriptionOkr) {
+        this.descriptionOkr = descriptionOkr;
+    }
+
     public String getVertical() {
         return vertical;
     }
@@ -66,47 +100,27 @@ public class Okr {
         this.vertical = vertical;
     }
 
-    public List<Kr> getKeyResults() {
-        return keyResults;
-    }
-
-    public void setKeyResults(List<Kr> keyResults) {
-        this.keyResults = keyResults;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
 
-    public String getResponsible() {
-        return responsible;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+    public Float getAdvanceOkr() {
+        return advanceOkr;
     }
 
-    public String getMail() {
-        return mail;
+    public void setAdvanceOkr(Float advanceOkr) {
+        this.advanceOkr = advanceOkr;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public List<HistoricalAdvance> getHistoricalOkr() {
+        return historicalOkr;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<UpdatePercentegeOkr> getUpdatePercentegeOkr() {
-        return updatePercentegeOkr;
-    }
-
-    public void setUpdatePercentegeOkr(List<UpdatePercentegeOkr> updatePercentegeOkr) {
-        this.updatePercentegeOkr = updatePercentegeOkr;
+    public void setHistoricalOkr(List<HistoricalAdvance> historicalOkr) {
+        this.historicalOkr = historicalOkr;
     }
 }
