@@ -20,4 +20,13 @@ class AssemblerTest {
         Assertions.assertEquals(usuarioVistaActual, usuarioVistaEsperado);
     }
 
+    @Test
+    public void generarUsuarioVista_ErrorEsperado(){
+        Usuario usuario = new Usuario(null, null, null);
+
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            Assembler.generarUsuarioVista(usuario);
+        });
+    }
+
 }
