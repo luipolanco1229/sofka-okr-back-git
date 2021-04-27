@@ -8,10 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class UserServiceOKR {
-    @Autowired
-    private RepositoryOKR repository;
 
-    public Mono<User> save(User user){
-        return repository.save(user);
-    }
 }
