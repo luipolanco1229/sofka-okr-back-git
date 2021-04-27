@@ -1,5 +1,5 @@
 package co.com.sofka.okrs.controller.calendar;
-import co.com.sofka.okrs.controller.calendar.domain.EventCalendar;
+import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
 import co.com.sofka.okrs.service.calendar.*;
 
 

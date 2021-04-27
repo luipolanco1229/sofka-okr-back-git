@@ -1,4 +1,4 @@
-package co.com.sofka.okrs.controller.calendar.domain;
+package co.com.sofka.okrs.domain.calendarDomain;
 
 import java.util.List;
 
