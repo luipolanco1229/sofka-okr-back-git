@@ -1,10 +1,12 @@
 package co.com.sofka.okrs.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
+@Document(collection = "Kr")
 public class Kr {
     @Id
     private String id;
