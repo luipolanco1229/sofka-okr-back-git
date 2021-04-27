@@ -14,9 +14,6 @@ public class UserControllerOKR {
     @Autowired
     private UserServiceOKR userService;
 
-    @PostMapping
-    public Mono<User> save(@RequestBody User user){
-        return  userService.save(user);
-    }
+
 
 }
