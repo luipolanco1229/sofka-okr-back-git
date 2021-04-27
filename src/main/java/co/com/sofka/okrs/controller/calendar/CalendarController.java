@@ -1,4 +1,5 @@
 package co.com.sofka.okrs.controller.calendar;
+import co.com.sofka.okrs.controller.calendar.domain.EventCalendar;
 import co.com.sofka.okrs.service.calendar.*;
 
 
@@ -19,7 +20,7 @@ public class CalendarController {
     private CalendarService calendarService;
 
    @PostMapping
-    public Mono<EventCalendar> saveEventKR(@RequestBody Evento evento) throws IOException, GeneralSecurityException {
+    public Mono<EventCalendar> saveEventKR(@RequestBody EventCalendar evento) throws IOException, GeneralSecurityException {
        return calendarService.save(evento);
     }
 
