@@ -1,7 +1,7 @@
 package co.com.sofka.okrs.service;
 
-import co.com.sofka.okrs.dashboard_dto.OkrLista;
-import co.com.sofka.okrs.dashboard_dto.UsuarioVista;
+import co.com.sofka.okrs.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dashboard_dto.UserView;
 import co.com.sofka.okrs.repository.RepositoryOKR;
 import co.com.sofka.okrs.repository.UsuarioRepository;
 import co.com.sofka.okrs.utils.Assembler;
@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ServicioDashboard {
+public class DashboardService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -19,13 +19,13 @@ public class ServicioDashboard {
     @Autowired
     private RepositoryOKR repositoryOKR;
 
-    public Mono<UsuarioVista> usuarioPorId(String id){
-        return usuarioRepository.findById(id).map(Assembler::generarUsuarioVista)
-                .switchIfEmpty(Mono.error(new IllegalArgumentException("El usuario no se encuentra registrado")));
+    public Mono<UserView> userById(String id){
+        return usuarioRepository.findById(id).map(Assembler::generateUserView)
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("User not found")));
     }
 
-    public Flux<OkrLista> okrPorUsuario(String id){
-        return repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc(id).map(Assembler::generarOkrLista)
-                .switchIfEmpty(Mono.error(new IllegalArgumentException("No hay Okrs creados por el usuario")));
+    public Flux<OkrList> okrByUser(String id){
+        return repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc(id).map(Assembler::generateOkrList)
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("There are not OKRs related with that User")));
     }
 }
