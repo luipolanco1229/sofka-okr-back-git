@@ -7,8 +7,8 @@ public class HistoricoAvance {
     private Date fechaActualizacion;
     private Float nuevoAvance;
 
-    public HistoricoAvance(Date fechaActualizacion, Float nuevoAvance) {
-        this.fechaActualizacion = fechaActualizacion;
+    public HistoricoAvance(Float nuevoAvance) {
+        this.fechaActualizacion = new Date();
         this.nuevoAvance = nuevoAvance;
     }
 
