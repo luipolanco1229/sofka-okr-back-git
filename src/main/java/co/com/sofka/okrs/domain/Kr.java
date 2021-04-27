@@ -12,36 +12,37 @@ public class Kr {
     @Id
     private String id;
     private String okrId;
-    private String resultadoClave;
-    private String nombreResponsableKr;
-    private String correoResponsableKr;
-    private Date fechaInicio;
-    private Date fechaFinalizacion;
-    private Float avanceKr;
-    private Float pesoPorcentual;
-    private String descripcionKr;
+    private String resultadoClave;//TODO: posiblemente es titulo en el modelo de Leonardo, no sé
+    private String responsible;
+    private String mail;
+    private Date startDate;
+    private Date finishDate;
+    private Float avanceKr; //TODO
+    private Float percentageWeight;
+    private String description;
+    //TODO: hay una lista que tienen ellos y no está en el modelo, revisar.
 
     public Kr(String id,
               String okrId,
               String resultadoClave,
-              String nombreResponsableKr,
-              String correoResponsableKr,
-              Date fechaInicio,
-              Date fechaFinalizacion,
+              String responsible,
+              String mail,
+              Date startDate,
+              Date finishDate,
               Float avanceKr,
-              Float pesoPorcentual,
-              String descripcionKr)
+              Float percentageWeight,
+              String description)
     {
         this.id = id;
         this.okrId = okrId;
         this.resultadoClave = resultadoClave;
-        this.nombreResponsableKr = nombreResponsableKr;
-        this.correoResponsableKr = correoResponsableKr;
-        this.fechaInicio = fechaInicio;
-        this.fechaFinalizacion = fechaFinalizacion;
+        this.responsible = responsible;
+        this.mail = mail;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
         this.avanceKr = avanceKr;
-        this.pesoPorcentual = pesoPorcentual;
-        this.descripcionKr = descripcionKr;
+        this.percentageWeight = percentageWeight;
+        this.description = description;
     }
 
     public String getId() {
@@ -68,36 +69,36 @@ public class Kr {
         this.resultadoClave = resultadoClave;
     }
 
-    public String getNombreResponsableKr() {
-        return nombreResponsableKr;
+    public String getResponsible() {
+        return responsible;
     }
 
-    public void setNombreResponsableKr(String nombreResponsableKr) {
-        this.nombreResponsableKr = nombreResponsableKr;
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
     }
 
-    public String getCorreoResponsableKr() {
-        return correoResponsableKr;
+    public String getMail() {
+        return mail;
     }
 
-    public void setCorreoResponsableKr(String correoResponsableKr) {
-        this.correoResponsableKr = correoResponsableKr;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getFechaFinalizacion() {
-        return fechaFinalizacion;
+    public Date getFinishDate() {
+        return finishDate;
     }
 
-    public void setFechaFinalizacion(Date fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
     }
 
     public Float getAvanceKr() {
@@ -108,19 +109,19 @@ public class Kr {
         this.avanceKr = avanceKr;
     }
 
-    public Float getPesoPorcentual() {
-        return pesoPorcentual;
+    public Float getPercentageWeight() {
+        return percentageWeight;
     }
 
-    public void setPesoPorcentual(Float pesoPorcentual) {
-        this.pesoPorcentual = pesoPorcentual;
+    public void setPercentageWeight(Float percentageWeight) {
+        this.percentageWeight = percentageWeight;
     }
 
-    public String getDescripcionKr() {
-        return descripcionKr;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcionKr(String descripcionKr) {
-        this.descripcionKr = descripcionKr;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

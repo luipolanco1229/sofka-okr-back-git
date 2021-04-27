@@ -11,31 +11,31 @@ public class Okr {
 
     @Id
     private String id;
-    private String titulo;
-    private String objetivo;
-    private String nombreResponsableOkr;
-    private String correoResponsableOkr;
-    private String usuarioId;
-    private String descripcionOkr;
+    private String title;
+    private String objective;
+    private String responsible;
+    private String mail;
+    private String usuarioId;//TODO
+    private String description;
     private String vertical;
-    private Date fechaInicio;
-    private Date fechaFinalizacion;
-    private Float avanceOkr;
-    private List<HistoricoAvance> historialOkr;
+    private Date startDate;
+    private Date fechaFinalizacion;//TODO
+    private Float avanceOkr;//TODO
+    private List<HistoricoAvance> historialOkr;//TODO
 
-    public Okr(String id, String titulo,
-               String objetivo, String nombreResponsableOkr, String correoResponsableOkr,
-               String usuarioId, String descripcionOkr, String vertical, Date fechaInicio,
+    public Okr(String id, String title,
+               String objective, String responsible, String mail,
+               String usuarioId, String descripcionOkr, String vertical, Date startDate,
                Date fechaFinalizacion, Float avanceOkr, List<HistoricoAvance> historialOkr) {
         this.id = id;
-        this.titulo = titulo;
-        this.objetivo = objetivo;
-        this.nombreResponsableOkr = nombreResponsableOkr;
-        this.correoResponsableOkr = correoResponsableOkr;
+        this.title = title;
+        this.objective = objective;
+        this.responsible = responsible;
+        this.mail = mail;
         this.usuarioId = usuarioId;
-        this.descripcionOkr = descripcionOkr;
+        this.description = descripcionOkr;
         this.vertical = vertical;
-        this.fechaInicio = fechaInicio;
+        this.startDate = startDate;
         this.fechaFinalizacion = fechaFinalizacion;
         this.avanceOkr = avanceOkr;
         this.historialOkr = historialOkr;
@@ -49,36 +49,36 @@ public class Okr {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getObjetivo() {
-        return objetivo;
+    public String getObjective() {
+        return objective;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = objetivo;
+    public void setObjective(String objective) {
+        this.objective = objective;
     }
 
-    public String getNombreResponsableOkr() {
-        return nombreResponsableOkr;
+    public String getResponsible() {
+        return responsible;
     }
 
-    public void setNombreResponsableOkr(String nombreResponsableOkr) {
-        this.nombreResponsableOkr = nombreResponsableOkr;
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
     }
 
-    public String getCorreoResponsableOkr() {
-        return correoResponsableOkr;
+    public String getMail() {
+        return mail;
     }
 
-    public void setCorreoResponsableOkr(String correoResponsableOkr) {
-        this.correoResponsableOkr = correoResponsableOkr;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getUsuarioId() {
@@ -89,12 +89,12 @@ public class Okr {
         this.usuarioId = usuarioId;
     }
 
-    public String getDescripcionOkr() {
-        return descripcionOkr;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcionOkr(String descripcionOkr) {
-        this.descripcionOkr = descripcionOkr;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getVertical() {
@@ -105,12 +105,12 @@ public class Okr {
         this.vertical = vertical;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getFechaFinalizacion() {

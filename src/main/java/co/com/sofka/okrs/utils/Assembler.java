@@ -12,6 +12,6 @@ public class Assembler {
     }
 
     public static OkrList generateOkrList(Okr okr){
-        return new OkrList(okr.getId(), okr.getTitulo(), okr.getAvanceOkr());
+        return new OkrList(okr.getId(), okr.getTitle(), okr.getAvanceOkr());
     }
 }
