@@ -1,4 +1,4 @@
-package co.com.sofka.okrs.service;
+package co.com.sofka.okrs;
 
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.domain.Usuario;
@@ -11,11 +11,11 @@ import java.util.List;
 
 public class TestUtils {
 
-    public static Mono<Usuario> usuarioFiltrado(){
-        return Mono.just(new Usuario("xxxx", "Daniel Burgos", "danielburgos@example.com"));
+    public static Mono<Usuario> userFiltered(){
+        return Mono.just(new Usuario("xxxx", "Daniel Alejandro", "danielburgos@ejemplo.com"));
     }
 
-    public static Flux<Okr> okrsPorUsuario(){
+    public static Flux<Okr> okrsByUser(){
         List<Okr> okrs = new ArrayList<>();
 
         Okr okr1 = new Okr("o-xxxxx1",
@@ -58,8 +58,8 @@ public class TestUtils {
                 List.of());
 
         okrs.add(okr1);
-        okrs.add(okr2);
         okrs.add(okr3);
+        okrs.add(okr2);
 
         return Flux.fromIterable(okrs);
     };

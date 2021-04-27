@@ -1,8 +1,8 @@
 package co.com.sofka.okrs.service;
 
 import co.com.sofka.okrs.TestUtils;
-import co.com.sofka.okrs.dashboard_dto.OkrLista;
-import co.com.sofka.okrs.dashboard_dto.UsuarioVista;
+import co.com.sofka.okrs.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dashboard_dto.UserView;
 import co.com.sofka.okrs.repository.RepositoryOKR;
 import co.com.sofka.okrs.repository.UsuarioRepository;
 import org.junit.jupiter.api.Test;
@@ -17,10 +17,10 @@ import reactor.test.StepVerifier;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ServicioDashboardTest {
+class DashboardServiceTest {
 
     @InjectMocks
-    ServicioDashboard servicioDashboard;
+    DashboardService dashboardService;
 
     @Mock
     UsuarioRepository userRepository;
@@ -29,42 +29,42 @@ class ServicioDashboardTest {
     RepositoryOKR repositoryOKR;
 
     @Test
-    void usuarioPorId(){
+    void userById(){
 
-        when(userRepository.findById("xxxx")).thenReturn(TestUtils.usuarioFiltrado());
+        when(userRepository.findById("xxxx")).thenReturn(TestUtils.userFiltered());
 
-        StepVerifier.create(servicioDashboard.usuarioPorId("xxxx"))
-                .expectNext(new UsuarioVista("Daniel Alejandro", "danielburgos@ejemplo.com"))
+        StepVerifier.create(dashboardService.userById("xxxx"))
+                .expectNext(new UserView("Daniel Alejandro", "danielburgos@ejemplo.com"))
                 .verifyComplete();
     }
 
     @Test
-    void usuarioPorId_ErrorEsperado(){
+    void userById_ErrorExpected(){
 
         when(userRepository.findById("xxxx")).thenReturn(Mono.empty());
 
-        StepVerifier.create(servicioDashboard.usuarioPorId("xxxx"))
+        StepVerifier.create(dashboardService.userById("xxxx"))
                 .expectError().verify();
     }
 
     @Test
-    void okrPorUsuario(){
+    void okrByUser(){
 
-        when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenReturn(TestUtils.okrsPorUsuario());
+        when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenReturn(TestUtils.okrsByUser());
 
-        StepVerifier.create(servicioDashboard.okrPorUsuario("xxxx"))
-                .expectNext(new OkrLista("o-xxxxx1", "Ganancias Trimestrales", 0.7f))
-                .expectNext(new OkrLista("o-xxxxx3", "Clientes Trimestriales", 0.2f))
-                .expectNext(new OkrLista("o-xxxxx2", "Desarrollos Trimestriales", 0f))
+        StepVerifier.create(dashboardService.okrByUser("xxxx"))
+                .expectNext(new OkrList("o-xxxxx1", "Ganancias Trimestrales", 0.7f))
+                .expectNext(new OkrList("o-xxxxx3", "Clientes Trimestriales", 0.2f))
+                .expectNext(new OkrList("o-xxxxx2", "Desarrollos Trimestriales", 0f))
                 .verifyComplete();
     }
 
     @Test
-    void okrPorUsuario_ErrorEsperado(){
+    void okrByUser_ErrorExpected(){
 
         when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenReturn(Flux.empty());
 
-        StepVerifier.create(servicioDashboard.okrPorUsuario("xxxx"))
+        StepVerifier.create(dashboardService.okrByUser("xxxx"))
                 .expectError().verify();
     }
 
