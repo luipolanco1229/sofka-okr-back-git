@@ -11,6 +11,7 @@ public class Okr {
 
     @Id
     private String id;
+    private String titulo;
     private String objetivo;
     private String nombreResponsableOkr;
     private String correoResponsableOkr;
@@ -22,18 +23,12 @@ public class Okr {
     private Float avanceOkr;
     private List<HistoricoAvance> historialOkr;
 
-    public Okr(String id,
-               String objetivo,
-               String nombreResponsableOkr,
-               String correoResponsableOkr,
-               String usuarioId,
-               String descripcionOkr,
-               String vertical,
-               Date fechaInicio,
-               Date fechaFinalizacion,
-               Float avanceOkr,
-               List<HistoricoAvance> historialOkr) {
+    public Okr(String id, String titulo,
+               String objetivo, String nombreResponsableOkr, String correoResponsableOkr,
+               String usuarioId, String descripcionOkr, String vertical, Date fechaInicio,
+               Date fechaFinalizacion, Float avanceOkr, List<HistoricoAvance> historialOkr) {
         this.id = id;
+        this.titulo = titulo;
         this.objetivo = objetivo;
         this.nombreResponsableOkr = nombreResponsableOkr;
         this.correoResponsableOkr = correoResponsableOkr;
@@ -52,6 +47,14 @@ public class Okr {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getObjetivo() {
