@@ -1,9 +1,12 @@
 package co.com.sofka.okrs.service;
 
 import co.com.sofka.okrs.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dashboard_dto.OkrTable;
 import co.com.sofka.okrs.dashboard_dto.UserView;
-import co.com.sofka.okrs.repository.RepositoryOKR;
-import co.com.sofka.okrs.repository.UsuarioRepository;
+import co.com.sofka.okrs.domain.Okr;
+import co.com.sofka.okrs.repository.RepositoryKr;
+import co.com.sofka.okrs.repository.RepositoryOkr;
+import co.com.sofka.okrs.repository.UserRepository;
 import co.com.sofka.okrs.utils.Assembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +17,32 @@ import reactor.core.publisher.Mono;
 public class DashboardService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private RepositoryOKR repositoryOKR;
+    private RepositoryOkr repositoryOKR;
+
+    @Autowired
+    private RepositoryKr repositoryKr;
 
     public Mono<UserView> userById(String id){
-        return usuarioRepository.findById(id).map(Assembler::generateUserView)
+        return userRepository.findById(id).map(Assembler::generateUserView)
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("User not found")));
     }
 
     public Flux<OkrList> okrByUser(String id){
         return repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc(id).map(Assembler::generateOkrList)
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("There are not OKRs related with that User")));
+    }
+
+    public Mono<OkrTable> findOkrTableById(String id) {
+        return Assembler
+                .generateOkrTable(repositoryOKR.findById(id), repositoryKr.findByOkrId(id))
+                .onErrorResume(e->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
+    }
+
+    public Mono<Float> findAdvanceOkrByOkrId(String id){
+        return repositoryOKR.findById(id)
+                .map(Okr::getAdvanceOkr).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
 }
