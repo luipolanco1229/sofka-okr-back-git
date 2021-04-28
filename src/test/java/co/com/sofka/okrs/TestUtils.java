@@ -1,7 +1,7 @@
 package co.com.sofka.okrs;
 
-import co.com.sofka.okrs.dashboard_dto.KrTable;
-import co.com.sofka.okrs.dashboard_dto.OkrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.KrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
 import co.com.sofka.okrs.domain.HistoricalAdvance;
 import co.com.sofka.okrs.domain.Kr;
 import co.com.sofka.okrs.domain.Okr;

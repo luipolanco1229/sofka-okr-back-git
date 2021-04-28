@@ -1,4 +1,4 @@
-package co.com.sofka.okrs.dashboard_dto;
+package co.com.sofka.okrs.dto.dashboard_dto;
 
 import java.util.Objects;
 

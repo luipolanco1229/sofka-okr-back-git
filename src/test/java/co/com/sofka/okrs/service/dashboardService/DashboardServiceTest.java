@@ -1,11 +1,12 @@
-package co.com.sofka.okrs.service;
+package co.com.sofka.okrs.service.dashboardService;
 
 import co.com.sofka.okrs.TestUtils;
-import co.com.sofka.okrs.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dto.dashboard_dto.UserView;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
+import co.com.sofka.okrs.service.dashboardService.DashboardService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

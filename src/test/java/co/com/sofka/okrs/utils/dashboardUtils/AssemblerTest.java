@@ -1,10 +1,10 @@
-package co.com.sofka.okrs.utils;
+package co.com.sofka.okrs.utils.dashboardUtils;
 
 import co.com.sofka.okrs.TestUtils;
-import co.com.sofka.okrs.dashboard_dto.KrTable;
-import co.com.sofka.okrs.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dashboard_dto.OkrTable;
-import co.com.sofka.okrs.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.KrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.UserView;
 import co.com.sofka.okrs.domain.Kr;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.domain.User;

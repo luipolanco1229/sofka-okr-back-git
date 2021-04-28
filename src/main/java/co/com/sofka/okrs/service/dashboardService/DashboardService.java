@@ -1,13 +1,13 @@
-package co.com.sofka.okrs.service;
+package co.com.sofka.okrs.service.dashboardService;
 
-import co.com.sofka.okrs.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dashboard_dto.OkrTable;
-import co.com.sofka.okrs.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.UserView;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
-import co.com.sofka.okrs.utils.Assembler;
+import co.com.sofka.okrs.utils.dashboardUtils.Assembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

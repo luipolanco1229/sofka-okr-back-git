@@ -1,9 +1,9 @@
-package co.com.sofka.okrs.controller;
+package co.com.sofka.okrs.controller.dashboardController;
 
-import co.com.sofka.okrs.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dashboard_dto.OkrTable;
-import co.com.sofka.okrs.dashboard_dto.UserView;
-import co.com.sofka.okrs.service.DashboardService;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
+import co.com.sofka.okrs.dto.dashboard_dto.UserView;
+import co.com.sofka.okrs.service.dashboardService.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
