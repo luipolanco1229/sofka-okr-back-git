@@ -2,29 +2,29 @@ package co.com.sofka.okrs.domain;
 
 import java.util.Date;
 
-public class HistoricoAvance {
+public class HistoricalAdvance {
 
-    private Date fechaActualizacion;
-    private Float nuevoAvance;
+    private Date dateUpdate;
+    private Float newAdvance;
 
-    public HistoricoAvance(Float nuevoAvance) {
-        this.fechaActualizacion = new Date();
-        this.nuevoAvance = nuevoAvance;
+    public HistoricalAdvance(Float newAdvance) {
+        this.dateUpdate = new Date();
+        this.newAdvance = newAdvance;
     }
 
-    public Date getFechaActualizacion() {
-        return fechaActualizacion;
+    public Date getDateUpdate() {
+        return dateUpdate;
     }
 
-    public void setFechaActualizacion(Date fechaActualizacion) {
-        this.fechaActualizacion = fechaActualizacion;
+    public void setDateUpdate(Date dateUpdate) {
+        this.dateUpdate = dateUpdate;
     }
 
-    public Float getNuevoAvance() {
-        return nuevoAvance;
+    public Float getNewAdvance() {
+        return newAdvance;
     }
 
-    public void setNuevoAvance(Float nuevoAvance) {
-        this.nuevoAvance = nuevoAvance;
+    public void setNewAdvance(Float newAdvance) {
+        this.newAdvance = newAdvance;
     }
 }
