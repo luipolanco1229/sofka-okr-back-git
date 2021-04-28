@@ -38,6 +38,24 @@ public class CalendarService {
         return  eventFlux;
     }
 
+    public Flux<Event> loadFilter(String correo) throws GeneralSecurityException, IOException {
+        var calendarService = calendarService();
+        var list = calendarService.events().list("primary").execute().getItems();
+        Flux<Event> eventFlux = Flux.fromIterable(list).map(event -> {
+            Boolean band = false;
+            var list2 = event.getAttendees();
+            for (EventAttendee eventAttendee: list2){
+                if(eventAttendee.getEmail().equals(correo)){
+                    band = true;
+                }
+            }
+            if (band){return event;}
+            else {return new Event();}
+        }).filter(event -> !event.isEmpty());
+
+        return eventFlux;
+    }
+
     public Mono<Event> save(EventCalendar eventC) throws IOException, GeneralSecurityException {
         Mono<EventCalendar> eventCalendar = Mono.just(eventC);
         Calendar service = calendarService();

@@ -30,4 +30,9 @@ public class CalendarController {
         return calendarService.load();
     }
 
+    @GetMapping("/list/{correo}")
+    public Flux<Event> loadFilter(@PathVariable String correo) throws IOException, GeneralSecurityException {
+        return calendarService.loadFilter(correo);
+    }
+
 }
