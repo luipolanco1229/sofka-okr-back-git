@@ -1,14 +1,15 @@
-package co.com.sofka.okrs.domainPlanification;
+package co.com.sofka.okrs.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
-@Document(collection = "Okr")
+@Document
 public class Okr {
-    @Id
+
+
     private String id;
     private String title;
     private String objective;
@@ -21,19 +22,18 @@ public class Okr {
     private Float advanceOkr;
     private List<HistoricalAdvance> historicalOkr;
 
-    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String descriptionOkr, String vertical,
-               Float advanceOkr, List<HistoricalAdvance> historicalOkr, String userId) {
+    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Float advanceOkr, List<HistoricalAdvance> historicalOkr) {
         this.id = id;
         this.title = title;
         this.objective = objective;
         this.personInChargeNameOkr = personInChargeNameOkr;
         this.personInChargeEmailOkr = personInChargeEmailOkr;
+        this.userId = userId;
         this.descriptionOkr = descriptionOkr;
         this.vertical = vertical;
         this.startDate = new Date();
         this.advanceOkr = advanceOkr;
         this.historicalOkr = historicalOkr;
-        this.userId = userId;
     }
 
     public String getId() {
@@ -122,5 +122,28 @@ public class Okr {
 
     public void setHistoricalOkr(List<HistoricalAdvance> historicalOkr) {
         this.historicalOkr = historicalOkr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Okr okr = (Okr) o;
+        return Objects.equals(id, okr.id) &&
+                Objects.equals(title, okr.title) &&
+                Objects.equals(objective, okr.objective) &&
+                Objects.equals(personInChargeNameOkr, okr.personInChargeNameOkr) &&
+                Objects.equals(personInChargeEmailOkr, okr.personInChargeEmailOkr) &&
+                Objects.equals(userId, okr.userId) &&
+                Objects.equals(descriptionOkr, okr.descriptionOkr) &&
+                Objects.equals(vertical, okr.vertical) &&
+                Objects.equals(startDate, okr.startDate) &&
+                Objects.equals(advanceOkr, okr.advanceOkr) &&
+                Objects.equals(historicalOkr, okr.historicalOkr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, objective, personInChargeNameOkr, personInChargeEmailOkr, userId, descriptionOkr, vertical, startDate, advanceOkr, historicalOkr);
     }
 }

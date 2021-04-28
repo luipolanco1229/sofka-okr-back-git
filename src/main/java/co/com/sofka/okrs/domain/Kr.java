@@ -1,12 +1,12 @@
-package co.com.sofka.okrs.domainPlanification;
+package co.com.sofka.okrs.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 
-@Document(collection = "Kr")
+@Document
 public class Kr {
+
     @Id
     private String id;
     private String okrId;
@@ -19,15 +19,24 @@ public class Kr {
     private Float percentageWeight;
     private String descriptionKr;
 
-    public Kr(String id, String okrId, String keyResult, String personInChargeNameKr, String personInChargeEmailKr,
-              Float advanceKr, Float percentageWeight, String descriptionKr) {
+    public Kr(String id,
+              String okrId,
+              String keyResult,
+              String personInChargeNameKr,
+              String personInChargeEmailKr,
+              Date startDate,
+              Date finishDate,
+              Float advanceKr,
+              Float percentageWeight,
+              String descriptionKr)
+    {
         this.id = id;
         this.okrId = okrId;
         this.keyResult = keyResult;
         this.personInChargeNameKr = personInChargeNameKr;
         this.personInChargeEmailKr = personInChargeEmailKr;
-        this.startDate = new Date();
-        this.finishDate = new Date();
+        this.startDate = startDate;
+        this.finishDate = finishDate;
         this.advanceKr = advanceKr;
         this.percentageWeight = percentageWeight;
         this.descriptionKr = descriptionKr;

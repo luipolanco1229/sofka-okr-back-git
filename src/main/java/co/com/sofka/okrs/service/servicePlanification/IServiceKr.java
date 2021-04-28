@@ -1,7 +1,6 @@
-package co.com.sofka.okrs.servicePlanification;
+package co.com.sofka.okrs.service.servicePlanification;
 
-import co.com.sofka.okrs.domainPlanification.Kr;
-import co.com.sofka.okrs.domainPlanification.Okr;
+import co.com.sofka.okrs.domain.Kr;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
