@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 @Repository
-public interface RepositoryOKR extends ReactiveMongoRepository<Okr, String>  {
+public interface RepositoryOkr extends ReactiveMongoRepository<Okr, String>  {
 
     Flux<Okr> findByUsuarioIdOrderByAvanceOkrDesc(String responsable);
 }

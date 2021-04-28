@@ -4,17 +4,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Usuario {
+public class User {
 
     @Id
     private String id;
-    private String nombre;
-    private String correo;
+    private String name;
+    private String email;
 
-    public Usuario(String id, String nombre, String correo) {
+    public User(String id, String name, String email) {
         this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
+        this.name = name;
+        this.email = email;
     }
 
     public String getId() {
@@ -25,19 +25,19 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

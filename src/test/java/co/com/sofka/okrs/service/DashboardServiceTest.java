@@ -3,8 +3,9 @@ package co.com.sofka.okrs.service;
 import co.com.sofka.okrs.TestUtils;
 import co.com.sofka.okrs.dashboard_dto.OkrList;
 import co.com.sofka.okrs.dashboard_dto.UserView;
-import co.com.sofka.okrs.repository.RepositoryOKR;
-import co.com.sofka.okrs.repository.UsuarioRepository;
+import co.com.sofka.okrs.repository.RepositoryKr;
+import co.com.sofka.okrs.repository.RepositoryOkr;
+import co.com.sofka.okrs.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,10 +23,13 @@ class DashboardServiceTest {
     DashboardService dashboardService;
 
     @Mock
-    UsuarioRepository userRepository;
+    UserRepository userRepository;
 
     @Mock
-    RepositoryOKR repositoryOKR;
+    RepositoryOkr repositoryOKR;
+
+    @Mock
+    RepositoryKr repositoryKr;
 
     @Test
     void userById(){
@@ -68,6 +71,38 @@ class DashboardServiceTest {
                 .expectError().verify();
     }
 
+    @Test
+    public void findOkrTableById(){
+        when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
 
+        when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(Flux.fromIterable(TestUtils.getListaKr()));
+
+        StepVerifier.create(dashboardService.findOkrTableById("6084801fb2ce1e4174af0245")).
+                expectNext(TestUtils.getokrTablaEsperado()).verifyComplete();
+    }
+
+    @Test
+    public void findOkrTableByIdExpectedError(){
+        when(repositoryOKR.findById("xxxx")).thenReturn(Mono.empty());
+        when(repositoryKr.findByOkrId("xxxx")).thenReturn(Flux.empty());
+
+        StepVerifier.create(dashboardService.findOkrTableById("xxxx"))
+                .expectComplete().verify();
+    }
+
+    @Test
+    public void findAdvanceOkrByOkrId(){
+        when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
+        StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("6084801fb2ce1e4174af0245")).
+                expectNext(0.68f).verifyComplete();
+    }
+
+    @Test
+    public void findAdvanceOkrByOkrIdExpectedError(){
+        when(repositoryOKR.findById("xxxx")).thenReturn(Mono.empty());
+
+        StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("xxxx"))
+                .expectComplete().verify();
+    }
 
 }

@@ -1,9 +1,7 @@
 package co.com.sofka.okrs.domain;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 
 @Document
@@ -12,37 +10,36 @@ public class Kr {
     @Id
     private String id;
     private String okrId;
-    private String resultadoClave;//TODO: posiblemente es titulo en el modelo de Leonardo, no sé
-    private String responsible;
-    private String mail;
+    private String keyResult;
+    private String personInChargeNameKr;
+    private String personInChargeEmailKr;
     private Date startDate;
     private Date finishDate;
-    private Float avanceKr; //TODO
+    private Float advanceKr;
     private Float percentageWeight;
-    private String description;
-    //TODO: hay una lista que tienen ellos y no está en el modelo, revisar.
+    private String descriptionKr;
 
     public Kr(String id,
               String okrId,
-              String resultadoClave,
-              String responsible,
-              String mail,
+              String keyResult,
+              String personInChargeNameKr,
+              String personInChargeEmailKr,
               Date startDate,
               Date finishDate,
-              Float avanceKr,
+              Float advanceKr,
               Float percentageWeight,
-              String description)
+              String descriptionKr)
     {
         this.id = id;
         this.okrId = okrId;
-        this.resultadoClave = resultadoClave;
-        this.responsible = responsible;
-        this.mail = mail;
+        this.keyResult = keyResult;
+        this.personInChargeNameKr = personInChargeNameKr;
+        this.personInChargeEmailKr = personInChargeEmailKr;
         this.startDate = startDate;
         this.finishDate = finishDate;
-        this.avanceKr = avanceKr;
+        this.advanceKr = advanceKr;
         this.percentageWeight = percentageWeight;
-        this.description = description;
+        this.descriptionKr = descriptionKr;
     }
 
     public String getId() {
@@ -61,28 +58,28 @@ public class Kr {
         this.okrId = okrId;
     }
 
-    public String getResultadoClave() {
-        return resultadoClave;
+    public String getKeyResult() {
+        return keyResult;
     }
 
-    public void setResultadoClave(String resultadoClave) {
-        this.resultadoClave = resultadoClave;
+    public void setKeyResult(String keyResult) {
+        this.keyResult = keyResult;
     }
 
-    public String getResponsible() {
-        return responsible;
+    public String getPersonInChargeNameKr() {
+        return personInChargeNameKr;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+    public void setPersonInChargeNameKr(String personInChargeNameKr) {
+        this.personInChargeNameKr = personInChargeNameKr;
     }
 
-    public String getMail() {
-        return mail;
+    public String getPersonInChargeEmailKr() {
+        return personInChargeEmailKr;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setPersonInChargeEmailKr(String personInChargeEmailKr) {
+        this.personInChargeEmailKr = personInChargeEmailKr;
     }
 
     public Date getStartDate() {
@@ -101,12 +98,12 @@ public class Kr {
         this.finishDate = finishDate;
     }
 
-    public Float getAvanceKr() {
-        return avanceKr;
+    public Float getAdvanceKr() {
+        return advanceKr;
     }
 
-    public void setAvanceKr(Float avanceKr) {
-        this.avanceKr = avanceKr;
+    public void setAdvanceKr(Float advanceKr) {
+        this.advanceKr = advanceKr;
     }
 
     public Float getPercentageWeight() {
@@ -117,11 +114,11 @@ public class Kr {
         this.percentageWeight = percentageWeight;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionKr() {
+        return descriptionKr;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionKr(String descriptionKr) {
+        this.descriptionKr = descriptionKr;
     }
 }
