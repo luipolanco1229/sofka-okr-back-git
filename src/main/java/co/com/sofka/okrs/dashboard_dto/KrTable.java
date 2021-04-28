@@ -1,5 +1,7 @@
 package co.com.sofka.okrs.dashboard_dto;
 
+import java.util.Objects;
+
 public class KrTabla {
 
     private String resultadoClave;
@@ -34,5 +36,20 @@ public class KrTabla {
 
     public void setAvanceKr(Float avanceKr) {
         this.avanceKr = avanceKr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        KrTabla krTabla = (KrTabla) o;
+        return Objects.equals(resultadoClave, krTabla.resultadoClave) &&
+                Objects.equals(nombreResponsableKr, krTabla.nombreResponsableKr) &&
+                Objects.equals(avanceKr, krTabla.avanceKr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resultadoClave, nombreResponsableKr, avanceKr);
     }
 }

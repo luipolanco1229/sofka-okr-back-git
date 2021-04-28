@@ -3,11 +3,19 @@ package co.com.sofka.okrs.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users")
-public class User {
+@Document
+public class Usuario {
+
     @Id
     private String id;
-    private String name;
+    private String nombre;
+    private String correo;
+
+    public Usuario(String id, String nombre, String correo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+    }
 
     public String getId() {
         return id;
@@ -17,11 +25,19 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

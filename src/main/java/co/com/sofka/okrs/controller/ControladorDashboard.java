@@ -1,6 +1,7 @@
 package co.com.sofka.okrs.controller;
 
 import co.com.sofka.okrs.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dashboard_dto.OkrTable;
 import co.com.sofka.okrs.dashboard_dto.UserView;
 import co.com.sofka.okrs.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.Objects;
 
 @RestController
@@ -38,5 +38,14 @@ public class ControladorDashboard {
     public void handleNullPointerException(){
     }
 
+    @GetMapping(value = "dashboard/okrTable/{id}")
+    public Mono<OkrTable> findOkrTablebyId(@PathVariable("id")String id){
+        return dashboardService.findOkrTableById(Objects.requireNonNull(id));
+    }
+
+    @GetMapping(value = "dashboard/okrAdvance/{id}")
+    public Mono<Float> findAdvanceOkrByOkrId(@PathVariable("id")String id){
+        return  dashboardService.findAdvanceOkrByOkrId(Objects.requireNonNull(id));
+    }
 
 }
