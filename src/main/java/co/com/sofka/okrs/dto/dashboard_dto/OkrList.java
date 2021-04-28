@@ -18,25 +18,16 @@ public class OkrList {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public float getOkrProgress() {
         return okrProgress;
     }
 
-    public void setOkrProgress(float okrProgress) {
-        this.okrProgress = okrProgress;
-    }
 
     @Override
     public boolean equals(Object o) {

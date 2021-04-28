@@ -18,25 +18,18 @@ public class KrTable {
         return keyResult;
     }
 
-    public void setKeyResult(String keyResult) {
-        this.keyResult = keyResult;
-    }
 
     public String getPersonInChargeNameKr() {
         return personInChargeNameKr;
     }
 
-    public void setPersonInChargeNameKr(String personInChargeNameKr) {
-        this.personInChargeNameKr = personInChargeNameKr;
-    }
+
 
     public Float getAdvanceKr() {
         return advanceKr;
     }
 
-    public void setAdvanceKr(Float advanceKr) {
-        this.advanceKr = advanceKr;
-    }
+
 
     @Override
     public boolean equals(Object o) {

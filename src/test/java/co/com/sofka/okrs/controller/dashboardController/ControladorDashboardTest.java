@@ -130,6 +130,7 @@ class ControladorDashboardTest {
                 .jsonPath("$.personInChargeNameOkr").isNotEmpty()
                 .jsonPath("$.personInChargeNameOkr").isEqualTo("danielBurgos");
     }
+
     @Test
     void findOkrTablebyIdWithNotFoundId(){
         when(repositoryOKR.findById("xxxx")).thenReturn(Mono.empty());
