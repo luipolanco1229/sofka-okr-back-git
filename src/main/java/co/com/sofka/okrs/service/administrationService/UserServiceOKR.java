@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Service
 public class UserServiceOKR {
     @Autowired
     private UserRepository repository;
 
     public Mono<User> save(User user){
-        return repository.save(user);
+        Mono<User> user1 = repository.findById(user.getId());
+        return repository.save(Objects.requireNonNull(user));
     }
 }
