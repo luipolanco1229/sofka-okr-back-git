@@ -20,6 +20,16 @@ public class User {
 
     private Boolean notificationCompletedOkr;
 
+    public User(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.mailCompletedOkr = true;
+        this.mailCompletedKr = true;
+        this.notificationCompletedKr = true;
+        this.notificationCompletedOkr = true;
+    }
+
     public String getId() {
         return id;
     }
