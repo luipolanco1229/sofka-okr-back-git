@@ -1,71 +1,69 @@
 package co.com.sofka.okrs.dashboard_dto;
 
-import reactor.core.publisher.Flux;
-
 import java.util.List;
 import java.util.Objects;
 
-public class OkrTabla {
+public class OkrTable {
 
-    private String titulo;
-    private String objetivo;
-    private String nombreResponsableOkr;
-    private List<KrTabla> resultadosClaves;
+    private String title;
+    private String objective;
+    private String personInChargeNameOkr;
+    private List<KrTable> keyResults;
 
-    public OkrTabla(String titulo, String objetivo, String nombreResponsableOkr, List<KrTabla> resultadosClaves) {
-        this.titulo = titulo;
-        this.objetivo = objetivo;
-        this.nombreResponsableOkr = nombreResponsableOkr;
-        this.resultadosClaves = resultadosClaves;
+    public OkrTable(String title, String objective, String personInChargeNameOkr, List<KrTable> keyResults) {
+        this.title = title;
+        this.objective = objective;
+        this.personInChargeNameOkr = personInChargeNameOkr;
+        this.keyResults = keyResults;
     }
 
-    public OkrTabla(){}
+    public OkrTable(){}
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getObjetivo() {
-        return objetivo;
+    public String getObjective() {
+        return objective;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = objetivo;
+    public void setObjective(String objective) {
+        this.objective = objective;
     }
 
-    public String getNombreResponsableOkr() {
-        return nombreResponsableOkr;
+    public String getPersonInChargeNameOkr() {
+        return personInChargeNameOkr;
     }
 
-    public void setNombreResponsableOkr(String nombreResponsableOkr) {
-        this.nombreResponsableOkr = nombreResponsableOkr;
+    public void setPersonInChargeNameOkr(String personInChargeNameOkr) {
+        this.personInChargeNameOkr = personInChargeNameOkr;
     }
 
-    public List<KrTabla> getResultadosClaves() {
-        return resultadosClaves;
+    public List<KrTable> getKeyResults() {
+        return keyResults;
     }
 
-    public void setResultadosClaves(List<KrTabla> resultadosClaves) {
-        this.resultadosClaves = resultadosClaves;
+    public void setKeyResults(List<KrTable> keyResults) {
+        this.keyResults = keyResults;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OkrTabla okrTabla = (OkrTabla) o;
-        return Objects.equals(titulo, okrTabla.titulo) &&
-                Objects.equals(objetivo, okrTabla.objetivo) &&
-                Objects.equals(nombreResponsableOkr, okrTabla.nombreResponsableOkr) &&
-                Objects.equals(resultadosClaves, okrTabla.resultadosClaves);
+        OkrTable okrTable = (OkrTable) o;
+        return Objects.equals(title, okrTable.title) &&
+                Objects.equals(objective, okrTable.objective) &&
+                Objects.equals(personInChargeNameOkr, okrTable.personInChargeNameOkr) &&
+                Objects.equals(keyResults, okrTable.keyResults);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(titulo, objetivo, nombreResponsableOkr, resultadosClaves);
+        return Objects.hash(title, objective, personInChargeNameOkr, keyResults);
     }
 }
