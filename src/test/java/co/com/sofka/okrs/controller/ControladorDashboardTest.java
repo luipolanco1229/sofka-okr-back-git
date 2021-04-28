@@ -96,4 +96,12 @@ class ControladorDashboardTest {
                 .exchange().expectStatus().isEqualTo(404);
     }
 
+    @Test
+    void nullPointerException_controlled(){
+        when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenThrow(new NullPointerException());
+
+        webTestClient.get().uri("/dashboard/user-okrs/{id}", "xxxx")
+                .exchange().expectStatus().isEqualTo(400);
+    }
+
 }
