@@ -24,6 +24,7 @@ public class CalendarService {
         Flux<Event> eventFlux = Flux.fromIterable(
                 calendarEvents( new DateTime(System.currentTimeMillis())).getItems()
         ).flatMap(event -> {
+            System.out.println(event.getId());
                     if(event.isEmpty()) {
                         return Flux.empty();
                     }else {
@@ -31,6 +32,7 @@ public class CalendarService {
                     }
                 }
         );
+
         /*eventFlux.subscribe(event -> {
             System.out.println(event.getDescription());
         });*/
@@ -38,14 +40,14 @@ public class CalendarService {
         return  eventFlux;
     }
 
-    public Flux<Event> loadFilter(String correo) throws GeneralSecurityException, IOException {
+    public Flux<Event> loadFilter(String email) throws GeneralSecurityException, IOException {
         var calendarService = calendarService();
         var list = calendarService.events().list("primary").execute().getItems();
         Flux<Event> eventFlux = Flux.fromIterable(list).map(event -> {
             Boolean band = false;
             var list2 = event.getAttendees();
             for (EventAttendee eventAttendee: list2){
-                if(eventAttendee.getEmail().equals(correo)){
+                if(eventAttendee.getEmail().equals(email)){
                     band = true;
                 }
             }
@@ -54,6 +56,13 @@ public class CalendarService {
         }).filter(event -> !event.isEmpty());
 
         return eventFlux;
+    }
+
+    public Mono<Void> delete(String id) throws GeneralSecurityException, IOException {
+        System.out.println(id);
+        var calendarService = calendarService();
+        calendarService.events().delete("primary",id).setSendNotifications(true).execute();
+        return Mono.empty();
     }
 
     public Mono<Event> save(EventCalendar eventC) throws IOException, GeneralSecurityException {
