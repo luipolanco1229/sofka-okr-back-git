@@ -1,5 +1,6 @@
 package co.com.sofka.okrs.domainPlanification;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Document(collection = "Okr")
 public class Okr {
-
+    @Id
     private String id;
     private String title;
     private String objective;

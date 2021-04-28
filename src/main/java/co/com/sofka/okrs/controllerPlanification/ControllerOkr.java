@@ -28,10 +28,10 @@ public class ControllerOkr {
         return  userService.save(okr);
     }
 
-//    @DeleteMapping("/deleteOkr{id}")
-//    public Mono<Okr> delete(@PathVariable("id") String id){
-//        return  userService.delete(id);
-//    }
+    @DeleteMapping("/deleteOkr/{id}")
+    public Mono<Void> delete(@PathVariable("id") String id){
+        return  userService.delete(id);
+    }
 
     }
 
