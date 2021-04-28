@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/Okrs")
+@CrossOrigin("*")
 public class ControllerOkr {
     @Autowired
     private ServiceOkr userService;

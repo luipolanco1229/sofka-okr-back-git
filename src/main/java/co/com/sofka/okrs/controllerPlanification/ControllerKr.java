@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/Krs")
+@CrossOrigin("*")
 public class ControllerKr {
     @Autowired
     private ServiceKr serviceKr;
