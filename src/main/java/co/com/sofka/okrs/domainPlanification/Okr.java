@@ -1,6 +1,5 @@
-package co.com.sofka.okrs.domain;
+package co.com.sofka.okrs.domainPlanification;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;

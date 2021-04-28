@@ -1,7 +1,7 @@
-package co.com.sofka.okrs.service;
+package co.com.sofka.okrs.servicePlanification;
 
-import co.com.sofka.okrs.domain.Okr;
-import co.com.sofka.okrs.repository.RepositoryOkr;
+import co.com.sofka.okrs.domainPlanification.Okr;
+import co.com.sofka.okrs.repositoryPlanification.RepositoryOkr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

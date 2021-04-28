@@ -1,7 +1,7 @@
-package co.com.sofka.okrs.controller;
+package co.com.sofka.okrs.controllerPlanification;
 
-import co.com.sofka.okrs.domain.Okr;
-import co.com.sofka.okrs.service.ServiceOkr;
+import co.com.sofka.okrs.domainPlanification.Okr;
+import co.com.sofka.okrs.servicePlanification.ServiceOkr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -26,9 +26,13 @@ public class ControllerOkr {
     @PutMapping("/updOkr")
     public Mono<Okr> update(@RequestBody Okr okr){
         return  userService.save(okr);
-
-
     }
+
+//    @DeleteMapping("/deleteOkr{id}")
+//    public Mono<Okr> delete(@PathVariable("id") String id){
+//        return  userService.delete(id);
+//    }
+
     }
 
 
