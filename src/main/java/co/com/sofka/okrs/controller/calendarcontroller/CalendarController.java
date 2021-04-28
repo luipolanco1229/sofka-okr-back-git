@@ -1,6 +1,6 @@
-package co.com.sofka.okrs.controller.calendar;
+package co.com.sofka.okrs.controller.calendarcontroller;
 import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
-import co.com.sofka.okrs.service.calendar.*;
+import co.com.sofka.okrs.service.calendarservice.*;
 
 
 import com.google.api.services.calendar.model.Event;

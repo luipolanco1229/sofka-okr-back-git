@@ -1,14 +1,12 @@
-package co.com.sofka.okrs.controller.calendar;
+package co.com.sofka.okrs.controller.calendarcontroller;
 
 import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
-import co.com.sofka.okrs.service.calendar.CalendarService;
+import co.com.sofka.okrs.service.calendarservice.CalendarService;
 import com.google.api.services.calendar.model.Event;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -21,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

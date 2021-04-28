@@ -1,4 +1,4 @@
-package co.com.sofka.okrs.service.calendar;
+package co.com.sofka.okrs.service.calendarservice;
 
 import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
 import co.com.sofka.okrs.util.calendar.CalendarUtil;
