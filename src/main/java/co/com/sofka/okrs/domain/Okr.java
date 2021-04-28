@@ -2,9 +2,9 @@ package co.com.sofka.okrs.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Document
 public class Okr {
@@ -13,32 +13,27 @@ public class Okr {
     private String id;
     private String title;
     private String objective;
-    private String responsible;
-    private String mail;
-    private String usuarioId;//TODO
-    private String description;
+    private String personInChargeNameOkr;
+    private String personInChargeEmailOkr;
+    private String userId;
+    private String descriptionOkr;
     private String vertical;
     private Date startDate;
-    private Date fechaFinalizacion;//TODO
-    private Float avanceOkr;//TODO
-    private List<HistoricoAvance> historialOkr;//TODO
+    private Float advanceOkr;
+    private List<HistoricalAdvance> historicalOkr;
 
-    public Okr(String id, String title,
-               String objective, String responsible, String mail,
-               String usuarioId, String descripcionOkr, String vertical, Date startDate,
-               Date fechaFinalizacion, Float avanceOkr, List<HistoricoAvance> historialOkr) {
+    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Float advanceOkr, List<HistoricalAdvance> historicalOkr) {
         this.id = id;
         this.title = title;
         this.objective = objective;
-        this.responsible = responsible;
-        this.mail = mail;
-        this.usuarioId = usuarioId;
-        this.description = descripcionOkr;
+        this.personInChargeNameOkr = personInChargeNameOkr;
+        this.personInChargeEmailOkr = personInChargeEmailOkr;
+        this.userId = userId;
+        this.descriptionOkr = descriptionOkr;
         this.vertical = vertical;
-        this.startDate = startDate;
-        this.fechaFinalizacion = fechaFinalizacion;
-        this.avanceOkr = avanceOkr;
-        this.historialOkr = historialOkr;
+        this.startDate = new Date();
+        this.advanceOkr = advanceOkr;
+        this.historicalOkr = historicalOkr;
     }
 
     public String getId() {
@@ -65,36 +60,36 @@ public class Okr {
         this.objective = objective;
     }
 
-    public String getResponsible() {
-        return responsible;
+    public String getPersonInChargeNameOkr() {
+        return personInChargeNameOkr;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+    public void setPersonInChargeNameOkr(String personInChargeNameOkr) {
+        this.personInChargeNameOkr = personInChargeNameOkr;
     }
 
-    public String getMail() {
-        return mail;
+    public String getPersonInChargeEmailOkr() {
+        return personInChargeEmailOkr;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setPersonInChargeEmailOkr(String personInChargeEmailOkr) {
+        this.personInChargeEmailOkr = personInChargeEmailOkr;
     }
 
-    public String getUsuarioId() {
-        return usuarioId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsuarioId(String usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionOkr() {
+        return descriptionOkr;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionOkr(String descriptionOkr) {
+        this.descriptionOkr = descriptionOkr;
     }
 
     public String getVertical() {
@@ -113,27 +108,42 @@ public class Okr {
         this.startDate = startDate;
     }
 
-    public Date getFechaFinalizacion() {
-        return fechaFinalizacion;
+    public Float getAdvanceOkr() {
+        return advanceOkr;
     }
 
-    public void setFechaFinalizacion(Date fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
+    public void setAdvanceOkr(Float advanceOkr) {
+        this.advanceOkr = advanceOkr;
     }
 
-    public Float getAvanceOkr() {
-        return avanceOkr;
+    public List<HistoricalAdvance> getHistoricalOkr() {
+        return historicalOkr;
     }
 
-    public void setAvanceOkr(Float avanceOkr) {
-        this.avanceOkr = avanceOkr;
+    public void setHistoricalOkr(List<HistoricalAdvance> historicalOkr) {
+        this.historicalOkr = historicalOkr;
     }
 
-    public List<HistoricoAvance> getHistorialOkr() {
-        return historialOkr;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Okr okr = (Okr) o;
+        return Objects.equals(id, okr.id) &&
+                Objects.equals(title, okr.title) &&
+                Objects.equals(objective, okr.objective) &&
+                Objects.equals(personInChargeNameOkr, okr.personInChargeNameOkr) &&
+                Objects.equals(personInChargeEmailOkr, okr.personInChargeEmailOkr) &&
+                Objects.equals(userId, okr.userId) &&
+                Objects.equals(descriptionOkr, okr.descriptionOkr) &&
+                Objects.equals(vertical, okr.vertical) &&
+                Objects.equals(startDate, okr.startDate) &&
+                Objects.equals(advanceOkr, okr.advanceOkr) &&
+                Objects.equals(historicalOkr, okr.historicalOkr);
     }
 
-    public void setHistorialOkr(List<HistoricoAvance> historialOkr) {
-        this.historialOkr = historialOkr;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, objective, personInChargeNameOkr, personInChargeEmailOkr, userId, descriptionOkr, vertical, startDate, advanceOkr, historicalOkr);
     }
 }
