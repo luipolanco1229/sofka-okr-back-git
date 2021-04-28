@@ -5,10 +5,12 @@ import co.com.sofka.okrs.dashboard_dto.OkrList;
 import co.com.sofka.okrs.dashboard_dto.UserView;
 import co.com.sofka.okrs.repository.RepositoryOKR;
 import co.com.sofka.okrs.repository.UsuarioRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -48,6 +50,13 @@ class DashboardServiceTest {
     }
 
     @Test
+    void userById_NullPointerExceptionExpected(){
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            dashboardService.userById(null);
+        });
+    }
+
+    @Test
     void okrByUser(){
 
         when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenReturn(TestUtils.okrsByUser());
@@ -68,6 +77,12 @@ class DashboardServiceTest {
                 .expectError().verify();
     }
 
+    @Test
+    void okrByUser_NullPointerExceptionExpected(){
+        Assertions.assertThrows(NullPointerException.class, ()-> {
+            dashboardService.okrByUser(null);
+        });
+    }
 
 
 }
