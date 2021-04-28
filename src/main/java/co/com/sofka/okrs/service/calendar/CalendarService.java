@@ -32,11 +32,6 @@ public class CalendarService {
                     }
                 }
         );
-
-        /*eventFlux.subscribe(event -> {
-            System.out.println(event.getDescription());
-        });*/
-
         return  eventFlux;
     }
 
