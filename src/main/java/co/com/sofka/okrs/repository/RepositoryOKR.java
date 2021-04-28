@@ -8,5 +8,5 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface RepositoryOKR extends ReactiveMongoRepository<Okr, String>  {
 
-    Flux<Okr> findByUsuarioIdOrderByAvanceOkrDesc(String responsable);
+    Flux<Okr> findByUsuarioIdOrderByAvanceOkrDesc(String usuario);
 }
