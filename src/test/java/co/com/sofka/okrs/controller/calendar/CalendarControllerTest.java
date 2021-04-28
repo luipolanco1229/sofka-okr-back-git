@@ -1,7 +1,9 @@
 package co.com.sofka.okrs.controller.calendar;
 
+import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
 import co.com.sofka.okrs.service.calendar.CalendarService;
 import com.google.api.services.calendar.model.Event;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -11,11 +13,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
@@ -33,7 +38,7 @@ class CalendarControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    @Mock
+    @MockBean
     CalendarService calendarService;
 
     @Test

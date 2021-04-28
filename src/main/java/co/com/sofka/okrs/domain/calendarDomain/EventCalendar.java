@@ -1,8 +1,12 @@
 package co.com.sofka.okrs.domain.calendarDomain;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class EventCalendar {
+    public static EventCalendar DEFAULT_EVENT_CALENDAR = new EventCalendar("default", "event default", "colombia", LocalDate.now().toString(), "06:00:00", "12:00:00", List.of("thisaexample@gmail.com", "Sofka.OKR@gmail.com", "Sofka.OKR@gmail.com"));
+
     private String title;
     private String description;
     private String location;
