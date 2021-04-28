@@ -30,9 +30,14 @@ public class CalendarController {
         return calendarService.load();
     }
 
-    @GetMapping("/list/{correo}")
-    public Flux<Event> loadFilter(@PathVariable String correo) throws IOException, GeneralSecurityException {
-        return calendarService.loadFilter(correo);
+    @GetMapping("/list/{email}")
+    public Flux<Event> loadFilter(@PathVariable String email) throws IOException, GeneralSecurityException {
+        return calendarService.loadFilter(email);
     }
 
+
+    @DeleteMapping("/delete/{id}")
+    public Mono<Void> delete(@PathVariable String id) throws IOException, GeneralSecurityException {
+        return calendarService.delete(id);
+    }
 }
