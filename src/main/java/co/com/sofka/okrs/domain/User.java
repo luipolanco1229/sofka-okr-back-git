@@ -3,6 +3,8 @@ package co.com.sofka.okrs.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document
 public class User {
 
@@ -86,4 +88,16 @@ public class User {
         this.notificationCompletedOkr = notificationCompletedOkr;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(mailCompletedOkr, user.mailCompletedOkr) && Objects.equals(mailCompletedKr, user.mailCompletedKr) && Objects.equals(notificationCompletedKr, user.notificationCompletedKr) && Objects.equals(notificationCompletedOkr, user.notificationCompletedOkr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, mailCompletedOkr, mailCompletedKr, notificationCompletedKr, notificationCompletedOkr);
+    }
 }
