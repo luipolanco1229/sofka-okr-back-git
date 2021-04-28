@@ -1,7 +1,7 @@
-package co.com.sofka.okrs.controller;
+package co.com.sofka.okrs.controller.administrationController;
 
 import co.com.sofka.okrs.domain.User;
-import co.com.sofka.okrs.service.UserServiceOKR;
+import co.com.sofka.okrs.service.administrationService.UserServiceOKR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

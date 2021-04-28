@@ -5,11 +5,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class User {
+
     @Id
     private String id;
 
     private String name;
-
     private String email;
     
     private Boolean mailCompletedOkr;
@@ -85,4 +85,5 @@ public class User {
     public void setNotificationCompletedOkr(Boolean notificationCompletedOkr) {
         this.notificationCompletedOkr = notificationCompletedOkr;
     }
+
 }
