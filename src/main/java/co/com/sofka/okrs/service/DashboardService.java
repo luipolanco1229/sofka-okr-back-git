@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Service
 public class DashboardService {
 
@@ -20,12 +22,12 @@ public class DashboardService {
     private RepositoryOKR repositoryOKR;
 
     public Mono<UserView> userById(String id){
-        return usuarioRepository.findById(id).map(Assembler::generateUserView)
+        return usuarioRepository.findById(Objects.requireNonNull(id)).map(Assembler::generateUserView)
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("User not found")));
     }
 
     public Flux<OkrList> okrByUser(String id){
-        return repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc(id).map(Assembler::generateOkrList)
+        return repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc(Objects.requireNonNull(id)).map(Assembler::generateOkrList)
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("There are not OKRs related with that User")));
     }
 }
