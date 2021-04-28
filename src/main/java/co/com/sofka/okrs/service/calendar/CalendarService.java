@@ -24,7 +24,6 @@ public class CalendarService {
         Flux<Event> eventFlux = Flux.fromIterable(
                 calendarEvents( new DateTime(System.currentTimeMillis())).getItems()
         ).flatMap(event -> {
-            System.out.println(event.getId());
                     if(event.isEmpty()) {
                         return Flux.empty();
                     }else {
@@ -32,6 +31,7 @@ public class CalendarService {
                     }
                 }
         );
+
         return  eventFlux;
     }
 
