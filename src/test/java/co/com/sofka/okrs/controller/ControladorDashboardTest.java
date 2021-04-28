@@ -104,4 +104,12 @@ class ControladorDashboardTest {
                 .exchange().expectStatus().isEqualTo(400);
     }
 
+    @Test
+    void illegalArgumentException_controlled(){
+        when(repositoryOKR.findByUsuarioIdOrderByAvanceOkrDesc("xxxx")).thenThrow(new IllegalArgumentException());
+
+        webTestClient.get().uri("/dashboard/user-okrs/{id}", "xxxx")
+                .exchange().expectStatus().isEqualTo(404);
+    }
+
 }
