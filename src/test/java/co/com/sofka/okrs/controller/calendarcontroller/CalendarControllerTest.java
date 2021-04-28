@@ -3,6 +3,8 @@ package co.com.sofka.okrs.controller.calendarcontroller;
 import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
 import co.com.sofka.okrs.service.calendarservice.CalendarService;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -22,6 +24,7 @@ import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
 
 @ExtendWith(SpringExtension.class)
@@ -39,7 +42,7 @@ class CalendarControllerTest {
     CalendarService calendarService;
 
     @Test
-    void loadCalendar() throws GeneralSecurityException, IOException {
+    void loadCalendarPrimaryCalendar() throws GeneralSecurityException, IOException {
         Mockito.when(calendarService.load()).thenReturn(Flux.just(new Event()));
 
         Flux<Event> calFlux = webTestClient.get().uri("/calendar/list").exchange()
@@ -48,13 +51,46 @@ class CalendarControllerTest {
                 .getResponseBody();
     }
     @Test
-    void saveCalendar() throws GeneralSecurityException, IOException {
+    void saveCalendarPrimaryCalendar() throws GeneralSecurityException, IOException {
         Mockito.when(calendarService.save(EventCalendar.DEFAULT_EVENT_CALENDAR)).thenReturn(Mono.just(new Event()));
         webTestClient.post().uri("/calendar/save").contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
                 .body(Mono.just(EventCalendar.DEFAULT_EVENT_CALENDAR), EventCalendar.class)
                 .exchange()
                 .expectStatus().isOk();
+    }
 
+    @Test
+    void loadFilterCalendarByEmail() throws GeneralSecurityException, IOException {
+        String email = "example@gmail.com";
+        Event event = new Event();
+        EventAttendee attendee = new EventAttendee();
+        attendee.setEmail("example@gmail.com");
+        attendee.setDisplayName("example person");
+        event.setAttendees(List.of(attendee));
+        Mockito.when(calendarService.loadFilter(email)).thenReturn(Flux.just(event));
+
+        webTestClient.get().uri("/calendar/list".concat("/{email}"), "example@gmail.com")
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
+                .expectBody(Event.class)
+                .consumeWith(eventS ->{
+                    var event1 = eventS.getResponseBody();
+                    var listA = event1.getAttendees();
+                    Assertions.assertEquals("example@gmail.com", listA.get(0).getEmail());
+                       }
+                );
+    }
+
+    @Test
+    void deletedCalendarEvent() throws GeneralSecurityException, IOException {
+        Mockito.when(calendarService.delete("ssxasdadxad21xada213")).thenReturn(Mono.empty());
+
+        webTestClient.get().uri("/calendar/list".concat("/{id}"), "ssxasdadxad21xada213")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
     }
 
 }

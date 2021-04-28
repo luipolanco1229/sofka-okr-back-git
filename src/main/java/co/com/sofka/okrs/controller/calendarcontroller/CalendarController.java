@@ -27,7 +27,6 @@ public class CalendarController {
 
 
     @GetMapping("/list")
-    @ResponseStatus(HttpStatus.OK)
     public Flux<Event> loadCalendar() throws IOException, GeneralSecurityException {
         return calendarService.load();
     }
