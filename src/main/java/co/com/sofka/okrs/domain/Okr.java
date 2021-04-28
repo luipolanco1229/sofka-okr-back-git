@@ -8,7 +8,7 @@ import java.util.List;
 
 @Document(collection = "Okr")
 public class Okr {
-    @Id
+
     private String id;
     private String title;
     private String objective;
