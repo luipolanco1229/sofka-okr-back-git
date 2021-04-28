@@ -27,9 +27,7 @@ public class ControllerOkr {
     public Mono<Okr> update(@RequestBody Okr okr){
         return  userService.save(okr);
 
-//    @DeleteMapping("/delete{id}")
-//    public Mono<Void> delete(@PathVariable("id") String id){
-//        return userService.delete(id);
+
     }
     }
 
