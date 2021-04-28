@@ -2,54 +2,54 @@ package co.com.sofka.okrs.dashboard_dto;
 
 import java.util.Objects;
 
-public class KrTabla {
+public class KrTable {
 
-    private String resultadoClave;
-    private String nombreResponsableKr;
-    private Float avanceKr;
+    private String keyResult;
+    private String personInChargeNameKr;
+    private Float advanceKr;
 
-    public KrTabla(String resultadoClave, String nombreResponsableKr, Float avanceKr) {
-        this.resultadoClave = resultadoClave;
-        this.nombreResponsableKr = nombreResponsableKr;
-        this.avanceKr = avanceKr;
+    public KrTable(String keyResult, String personInChargeNameKr, Float advanceKr) {
+        this.keyResult = keyResult;
+        this.personInChargeNameKr = personInChargeNameKr;
+        this.advanceKr = advanceKr;
     }
 
-    public String getResultadoClave() {
-        return resultadoClave;
+    public String getKeyResult() {
+        return keyResult;
     }
 
-    public void setResultadoClave(String resultadoClave) {
-        this.resultadoClave = resultadoClave;
+    public void setKeyResult(String keyResult) {
+        this.keyResult = keyResult;
     }
 
-    public String getNombreResponsableKr() {
-        return nombreResponsableKr;
+    public String getPersonInChargeNameKr() {
+        return personInChargeNameKr;
     }
 
-    public void setNombreResponsableKr(String nombreResponsableKr) {
-        this.nombreResponsableKr = nombreResponsableKr;
+    public void setPersonInChargeNameKr(String personInChargeNameKr) {
+        this.personInChargeNameKr = personInChargeNameKr;
     }
 
-    public Float getAvanceKr() {
-        return avanceKr;
+    public Float getAdvanceKr() {
+        return advanceKr;
     }
 
-    public void setAvanceKr(Float avanceKr) {
-        this.avanceKr = avanceKr;
+    public void setAdvanceKr(Float advanceKr) {
+        this.advanceKr = advanceKr;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        KrTabla krTabla = (KrTabla) o;
-        return Objects.equals(resultadoClave, krTabla.resultadoClave) &&
-                Objects.equals(nombreResponsableKr, krTabla.nombreResponsableKr) &&
-                Objects.equals(avanceKr, krTabla.avanceKr);
+        KrTable krTable = (KrTable) o;
+        return Objects.equals(keyResult, krTable.keyResult) &&
+                Objects.equals(personInChargeNameKr, krTable.personInChargeNameKr) &&
+                Objects.equals(advanceKr, krTable.advanceKr);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultadoClave, nombreResponsableKr, avanceKr);
+        return Objects.hash(keyResult, personInChargeNameKr, advanceKr);
     }
 }
