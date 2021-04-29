@@ -65,4 +65,14 @@ class CalendarControllerTest {
                 .expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE);
     }
+
+    @Test
+    void deletedCalendarEvent() throws GeneralSecurityException, IOException {
+
+        webTestClient.delete().uri("/calendar/delete".concat("/{id}"), "ssxasdadxad21xada213")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .exchange()
+                .expectStatus().is5xxServerError()
+                .expectBody(Void.class);
+    }
 }
