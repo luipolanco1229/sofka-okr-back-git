@@ -33,12 +33,18 @@ public class NotificationCompletedService {
 
     public Flux<String> completedOkr(String id) throws IOException {
         List<String> dataCompletedOkr = new ArrayList<>();
-        Mono<Okr> documentOkr = repositoryOkr.findById(id);
+        /*Mono<Okr> documentOkr = repositoryOkr.findById(id);
         documentOkr.map(okr -> {dataCompletedOkr.add(okr.getUserId()); dataCompletedOkr.add(okr.getTitle()); dataCompletedOkr.add(okr.getAdvanceOkr().toString());
         return  okr;});
         Mono<User> documentUser = userRepository.findById(dataCompletedOkr.get(0));
         documentUser.map(user -> {dataCompletedOkr.add(user.getEmail()); dataCompletedOkr.add(user.getName());
-        return user;});
+        return user;});*/
+        dataCompletedOkr.add("fjhvc4445nfd6h4nfd4");
+        dataCompletedOkr.add("Crear tarea");
+        Float numero = 100F;
+        dataCompletedOkr.add(numero.toString());
+        dataCompletedOkr.add("luipolanco1229@gmail.com");
+        dataCompletedOkr.add("Luisa");
 
         if (Float.parseFloat(dataCompletedOkr.get(2)) == 100){
             completedOkrEmail(dataCompletedOkr.get(3));
