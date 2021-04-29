@@ -19,8 +19,13 @@ public class NotificationController {
     @Autowired
     NotificationCompletedService notificationCompletedService;
 
-    @GetMapping("completeokr/{id}")
+    @GetMapping("completedokr/{id}")
     public Flux<String> completedOkr(@PathVariable String id) throws IOException {
         return notificationCompletedService.completedOkr(id);
+    }
+
+    @GetMapping("completedkr/{id}")
+    public Flux<String> completedKr(@PathVariable String id) throws IOException {
+        return notificationCompletedService.completedKr(id);
     }
 }
