@@ -1,7 +1,11 @@
 package co.com.sofka.okrs.service.notificationService;
 
+import co.com.sofka.okrs.domain.Kr;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.domain.User;
+import co.com.sofka.okrs.domain.notificationsDomain.Notification;
+import co.com.sofka.okrs.repository.RepositoryKr;
+import co.com.sofka.okrs.repository.RepositoryNotification;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
 import co.com.sofka.okrs.utils.notificationsUtils.emailsNotifications.EmailCompletedKr;
@@ -30,51 +34,79 @@ public class NotificationCompletedService {
     UserRepository userRepository;
     @Autowired
     RepositoryOkr repositoryOkr;
+    @Autowired
+    RepositoryNotification repositoryNotification;
+    Notification notification;
+    @Autowired
+    RepositoryKr repositoryKr;
 
 
     public Flux<String> completedOkr(String id) throws IOException {
         List<String> dataCompletedOkr = new ArrayList<>();
         /*Mono<Okr> documentOkr = repositoryOkr.findById(id);
-        documentOkr.map(okr -> {dataCompletedOkr.add(okr.getUserId()); dataCompletedOkr.add(okr.getTitle()); dataCompletedOkr.add(okr.getAdvanceOkr().toString());
+        documentOkr.map(okr -> {dataCompletedOkr.add(okr.getUserId());
+                                dataCompletedOkr.add(okr.getTitle());
+                                dataCompletedOkr.add(okr.getAdvanceOkr().toString());
         return  okr;});
         Mono<User> documentUser = userRepository.findById(dataCompletedOkr.get(0));
-        documentUser.map(user -> {dataCompletedOkr.add(user.getEmail()); dataCompletedOkr.add(user.getName());
+        documentUser.map(user -> {dataCompletedOkr.add(user.getEmail());
+                                    dataCompletedOkr.add(user.getName());
+                                    dataCompletedOkr.add(user.getNotificationCompletedKr().toString());
+                                    dataCompletedOkr.add(user.getMailCompletedKr().toString());
         return user;});*/
-        dataCompletedOkr.add("fjhvc4445nfd6h4nfd4");
+       dataCompletedOkr.add("fjhvc4445nfd6h4nfd4");
         dataCompletedOkr.add("Crear tarea");
         Float numero = 100F;
         dataCompletedOkr.add(numero.toString());
         dataCompletedOkr.add("luipolanco1229@gmail.com");
         dataCompletedOkr.add("Luisa");
+        Boolean boolean1= false;
+        dataCompletedOkr.add(boolean1.toString());
+        Boolean boolean2= false;
+        dataCompletedOkr.add(boolean2.toString());
 
-        if (Float.parseFloat(dataCompletedOkr.get(2)) == 100){
-            completedOkrEmail(dataCompletedOkr.get(3));
-            return Flux.just(dataCompletedOkr.get(1), dataCompletedOkr.get(4));
-        } return Flux.empty();
+
+        return sendNotificationCompletedOkr(dataCompletedOkr);
 
     }
 
+    private Flux<String> sendNotificationCompletedOkr(List<String> dataCompletedOkr) throws IOException {
+        if (Float.parseFloat(dataCompletedOkr.get(2)) == 100 && Boolean.parseBoolean(dataCompletedOkr.get(5)) == true && Boolean.parseBoolean(dataCompletedOkr.get(6)) == true){
+            completedOkrEmail(dataCompletedOkr.get(3));
+            notification.setNotificationDescription("Haz completado el OKR" + dataCompletedOkr.get(1));
+            notification.setViewed(false);
+            repositoryNotification.save(new Notification("", dataCompletedOkr.get(0), notification.getNotificationDescription(),
+                    dataCompletedOkr.get(1),  notification.getViewed()));
+            return Flux.just(dataCompletedOkr.get(1), dataCompletedOkr.get(4));
+        }
+        return Flux.empty();
+    }
 
 
     public Flux<String> completedKr(String id) throws IOException {
         List<String> dataCompletedKr = new ArrayList<>();
-        /*Mono<Okr> documentOkr = repositoryOkr.findById(id);
-        documentOkr.map(okr -> {dataCompletedOkr.add(okr.getUserId()); dataCompletedOkr.add(okr.getTitle()); dataCompletedOkr.add(okr.getAdvanceOkr().toString());
-        return  okr;});
-        Mono<User> documentUser = userRepository.findById(dataCompletedOkr.get(0));
-        documentUser.map(user -> {dataCompletedOkr.add(user.getEmail()); dataCompletedOkr.add(user.getName());
-        return user;});*/
-        dataCompletedKr.add("fjhvc4445nfd6h4nfd4");
+        Mono<Kr> documentKr = repositoryKr.findById(id);
+        documentKr.map(kr -> {dataCompletedKr.add(kr.getId());
+                                dataCompletedKr.add(kr.getKeyResult());
+                                dataCompletedKr.add(kr.getOkrId());
+                                dataCompletedKr.add(kr.getAdvanceKr().toString());
+        return  kr;});
+        Mono<Okr> documentOkr = repositoryOkr.findById(dataCompletedKr.get(2));
+        documentOkr.map(okr -> {dataCompletedKr.add(okr.getUserId()); return okr; });
+        Mono<User> documentUser = userRepository.findById(dataCompletedKr.get(0));
+        documentUser.map(user -> {dataCompletedKr.add(user.getEmail());
+                                    dataCompletedKr.add(user.getName());
+                                    dataCompletedKr.add(user.getNotificationCompletedKr().toString());
+                                    dataCompletedKr.add(user.getMailCompletedKr().toString());
+        return user;});
+        /*dataCompletedKr.add("fjhvc4445nfd6h4nfd4");
         dataCompletedKr.add("Crear  tarea sobre sendgrid");
         Float numero = 100F;
         dataCompletedKr.add(numero.toString());
         dataCompletedKr.add("luipolanco1229@gmail.com");
-        dataCompletedKr.add("Luisa");
+        dataCompletedKr.add("Luisa");*/
 
-        if (Float.parseFloat(dataCompletedKr.get(2)) == 100){
-            completedKrEmail(dataCompletedKr.get(3));
-            return Flux.just(dataCompletedKr.get(1), dataCompletedKr.get(4));
-        } return Flux.empty();
+        return sendNotificationCompletedKr(dataCompletedKr);
 
     }
 
@@ -82,6 +114,19 @@ public class NotificationCompletedService {
 
 
 
+
+
+    private Flux<String> sendNotificationCompletedKr(List<String> dataCompletedKr) throws IOException {
+        if (Float.parseFloat(dataCompletedKr.get(3)) == 100 && Boolean.parseBoolean(dataCompletedKr.get(7)) == true && Boolean.parseBoolean(dataCompletedKr.get(8)) == true){
+            completedKrEmail(dataCompletedKr.get(5));
+            notification.setNotificationDescription("Haz completado este KR" + dataCompletedKr.get(1));
+            notification.setViewed(false);
+            repositoryNotification.save(new Notification("", dataCompletedKr.get(4), notification.getNotificationDescription(),
+                    dataCompletedKr.get(2), dataCompletedKr.get(1),  notification.getViewed() ));
+            return Flux.just(dataCompletedKr.get(1), dataCompletedKr.get(4));
+        }
+        return Flux.empty();
+    }
 
 
     private void completedOkrEmail(String email) throws IOException {

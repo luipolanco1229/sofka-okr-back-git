@@ -2,9 +2,10 @@ package co.com.sofka.okrs.domain.notificationsDomain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document
-public class Notifications {
+public class Notification {
 
         @Id
         String id;
@@ -14,12 +15,20 @@ public class Notifications {
         String krId;
         Boolean viewed;
 
-        public Notifications(String id, String userId, String notificationDescription, String okrId, String krId, Boolean viewed) {
+        public Notification(String id, String userId, String notificationDescription, String okrId, String krId, Boolean viewed) {
                 this.id = id;
                 this.userId = userId;
                 this.notificationDescription = notificationDescription;
                 this.okrId = okrId;
                 this.krId = krId;
+                this.viewed = viewed;
+        }
+
+        public Notification(String id, String userId, String notificationDescription, String okrId, Boolean viewed) {
+                this.id = id;
+                this.userId = userId;
+                this.notificationDescription = notificationDescription;
+                this.okrId = okrId;
                 this.viewed = viewed;
         }
 
