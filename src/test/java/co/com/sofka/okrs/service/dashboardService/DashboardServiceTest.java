@@ -1,12 +1,14 @@
 package co.com.sofka.okrs.service.dashboardService;
 
 import co.com.sofka.okrs.TestUtils;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
 import co.com.sofka.okrs.dto.dashboard_dto.UserView;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
 import co.com.sofka.okrs.service.dashboardService.DashboardService;
+import co.com.sofka.okrs.testHelpers.dashboardTestHelpers.TestHelpersDashboard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -105,5 +110,46 @@ class DashboardServiceTest {
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("xxxx"))
                 .expectComplete().verify();
     }
+
+    @Test
+    public void generateBurnDownData(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+        List<Float> expectedActualPercentage = List.of(100.0f, 83.0f, 83.0f, 80.0f, 80.0f, 80.0f, 80.0f, 60.0f);
+        List<Integer> expectedExpectedPercentage = List.of(100, 92, 84, 75, 67, 59, 50, 42, 34, 25, 17, 9, 0);
+        List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
+        OkrBurnDownChart chart = new OkrBurnDownChart(expectedActualPercentage, expectedExpectedPercentage, expectedLabel);
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+        StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectNext(chart).verifyComplete();
+    }
+
+    @Test
+    public void generateBurnDownData_errorExpected_NoOkrsRelated(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.error(new NullPointerException("There is not Okrs related to that Id")));
+
+        StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
+    }
+
+    @Test
+    public void generateBurnDownData_errorExpected_NoKrsRelated(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.error(new NullPointerException("There is not Okrs related to that Id")));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+        StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
+    }
+
 
 }

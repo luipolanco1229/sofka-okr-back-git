@@ -1,5 +1,6 @@
 package co.com.sofka.okrs.service.dashboardService;
 
+import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
 import co.com.sofka.okrs.dto.dashboard_dto.UserView;
@@ -48,4 +49,11 @@ public class DashboardService {
                     return okr.getAdvanceOkr();
                 }).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
+
+    public Mono<OkrBurnDownChart> generateBurnDownData(String id){
+        return Mono.zip(repositoryOKR.findById(id), repositoryKr.findFirstByOkrIdOrderByFinishDate(id), repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(id))
+                .map(element -> Assembler.generateBurnDownData(element.getT1(), element.getT2(), element.getT3()))
+                .onErrorResume(e -> Mono.error(new IllegalArgumentException("There are no Okrs or Krs registered related to that ID")));
+    }
+
 }
