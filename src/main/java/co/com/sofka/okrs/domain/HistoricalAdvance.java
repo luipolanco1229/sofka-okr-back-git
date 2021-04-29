@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class HistoricalAdvance {
 
-    @Id
     private Date dateUpdate;
     private Float newAdvance;
+
+
 
     public HistoricalAdvance(Float newAdvance) {
         this.dateUpdate = new Date();
