@@ -32,6 +32,9 @@ public class Notification {
                 this.viewed = viewed;
         }
 
+        public Notification() {
+        }
+
         public String getId() {
                 return id;
         }
