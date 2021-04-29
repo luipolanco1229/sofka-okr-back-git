@@ -3,6 +3,7 @@ package co.com.sofka.okrs.controller.calendarcontroller;
 import co.com.sofka.okrs.domain.calendarDomain.EventCalendar;
 import co.com.sofka.okrs.service.calendarservice.CalendarService;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,7 @@ import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -47,5 +49,20 @@ class CalendarControllerTest {
                 .body(Mono.just(EventCalendar.DEFAULT_EVENT_CALENDAR), EventCalendar.class)
                 .exchange()
                 .expectStatus().isOk();
+    }
+
+    @Test
+    void loadFilterCalendarByEmail() throws GeneralSecurityException, IOException {
+        String email = "example@gmail.com";
+        Event event = new Event();
+        EventAttendee attendee = new EventAttendee();
+        attendee.setEmail(email);
+        attendee.setDisplayName("example person");
+        event.setAttendees(List.of(attendee));
+
+        webTestClient.get().uri("/calendar/list".concat("/{email}"), email)
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE);
     }
 }
