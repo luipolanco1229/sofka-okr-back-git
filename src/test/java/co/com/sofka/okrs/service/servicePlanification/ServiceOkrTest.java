@@ -58,10 +58,6 @@ class ServiceOkrTest {
 
         when(repositoryOkr.findAll()).thenReturn(Flux.just(okr));
         StepVerifier.create(serviceOkr.findAll()).expectNext(okr).verifyComplete();
-
     }
-
-
-
 
 }
