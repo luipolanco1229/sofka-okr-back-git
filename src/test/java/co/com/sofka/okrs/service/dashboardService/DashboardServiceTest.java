@@ -100,7 +100,7 @@ class DashboardServiceTest {
     public void findAdvanceOkrByOkrId(){
         when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(68.0f).verifyComplete();
+                expectNext(0.68f).verifyComplete();
     }
 
     @Test
@@ -151,5 +151,20 @@ class DashboardServiceTest {
         StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
     }
 
+
+    @Test
+    public void findAdvanceKrsByOkrId(){
+        when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
+        StepVerifier.create(dashboardService.findAdvanceKrsByOkrId("6084801fb2ce1e4174af0245")).
+                expectNext(24.0f).expectNext(24.0f).expectNext(32.0f).verifyComplete();
+    }
+
+    @Test
+    public void findAdvanceKrsByOkrIdExpectedError(){
+        when(repositoryOKR.findById("xxxx")).thenReturn(Mono.empty());
+
+        StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("xxxx"))
+                .expectComplete().verify();
+    }
 
 }

@@ -51,8 +51,13 @@ public class ControladorDashboard {
     }
 
     @GetMapping(value = "dashboard/burndownchart/{id}")
-    public Mono<OkrBurnDownChart> generateBurnDownChartDataByOkrId(@PathVariable("id") String id){
+    public Mono<OkrBurnDownChart> generateBurnDownChartDataByOkrId(@PathVariable("id") String id) {
         return dashboardService.generateBurnDownData(Objects.requireNonNull(id));
+    }
+    @GetMapping(value = "dashboard/krsAdvance/{id}")
+    public Flux<Float> findAdvanceKrsByOkrId(@PathVariable("id")String id){
+        return  dashboardService.findAdvanceKrsByOkrId(Objects.requireNonNull(id));
+
     }
 
 }

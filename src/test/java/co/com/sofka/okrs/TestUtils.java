@@ -112,4 +112,45 @@ public class TestUtils {
         return krTableListaEsperada;
     }
 
+    public static Flux<Kr> getFluxKr(){
+        List<Kr> krs = new ArrayList<>();
+
+        Kr kr1 = new Kr("o-xxxxx1",
+                "6084801fb2ce1e4174af0245",
+                "Alcanzar xxx ganancias",
+                "Daniel Burgos",
+                "danielburgos@example.com",
+                new Date(),
+                new Date(),
+                80.0f,
+                30.0f, "pokjhgf");
+
+        Kr kr2 = new Kr("o-xxxxx2",
+                "6084801fb2ce1e4174af0245",
+                "Alcanzar xxx desarrollos completados",
+                "Daniel Burgos",
+                "danielburgos@example.com",
+                new Date(),
+                new Date(),
+                80.0f,
+                30.0f,
+                "cghkl");
+
+        Kr kr3 = new Kr("o-xxxxx3",
+                "6084801fb2ce1e4174af0245",
+                "Alcanzar xxx clientes nuevos",
+                "Daniel Burgos",
+                "danielburgos@example.com",
+                new Date(),
+                new Date(),
+                80.0f,
+                40.0f,
+                "cghkl");
+
+        krs.add(kr1);
+        krs.add(kr2);
+        krs.add(kr3);
+
+        return Flux.fromIterable(krs);
+    }
 }
