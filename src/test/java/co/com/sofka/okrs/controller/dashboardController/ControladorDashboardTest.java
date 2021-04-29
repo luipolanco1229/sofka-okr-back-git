@@ -158,4 +158,23 @@ class ControladorDashboardTest {
         webTestClient.get().uri("/dashboard/okrAdvance/{id}", "xxxx")
                 .exchange().expectStatus().isEqualTo(200);
     }
+
+    @Test
+    public void findAdvanceKrsByOkrId(){
+        when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
+
+        webTestClient.get().uri("/dashboard/krsAdvance/{id}", "6084801fb2ce1e4174af0245")
+                .exchange().expectStatus().isOk().expectBody()
+                .equals(24.0f);
+
+        Mockito.verify(repositoryKr, times(1)).findByOkrId("6084801fb2ce1e4174af0245");
+    }
+
+    @Test
+    public void findAdvanceKrsByOkrIdWithNotFoundOId(){
+        when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
+
+        webTestClient.get().uri("/dashboard/krsAdvance/{id}", "xxxx")
+                .exchange().expectStatus().isEqualTo(400);
+    }
 }
