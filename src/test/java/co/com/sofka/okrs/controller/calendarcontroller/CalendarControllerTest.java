@@ -72,21 +72,14 @@ class CalendarControllerTest {
         webTestClient.get().uri("/calendar/list".concat("/{email}"), "example@gmail.com")
                 .exchange()
                 .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
-                .expectBody(Event.class)
-                .consumeWith(eventS ->{
-                    var event1 = eventS.getResponseBody();
-                    var listA = event1.getAttendees();
-                    Assertions.assertEquals("example@gmail.com", listA.get(0).getEmail());
-                       }
-                );
+                .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE);
     }
 
     @Test
     void deletedCalendarEvent() throws GeneralSecurityException, IOException {
         Mockito.when(calendarService.delete("ssxasdadxad21xada213")).thenReturn(Mono.empty());
 
-        webTestClient.get().uri("/calendar/list".concat("/{id}"), "ssxasdadxad21xada213")
+        webTestClient.delete().uri("/calendar/delete".concat("/{id}"), "ssxasdadxad21xada213")
                 .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
                 .exchange()
                 .expectStatus().isOk()
