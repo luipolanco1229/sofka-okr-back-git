@@ -17,9 +17,7 @@ public class NotificationConfigurationService {
     }
 
     public Mono<User> InsertConfig (User user){
-
         userRepository.insert(user);
-
         return Mono.empty();
     }
 
