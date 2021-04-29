@@ -48,4 +48,9 @@ public class ControladorDashboard {
         return  dashboardService.findAdvanceOkrByOkrId(Objects.requireNonNull(id));
     }
 
+    @GetMapping(value = "dashboard/krsAdvance/{id}")
+    public Flux<Float> findAdvanceKrsByOkrId(@PathVariable("id")String id){
+        return  dashboardService.findAdvanceKrsByOkrId(Objects.requireNonNull(id));
+    }
+
 }
