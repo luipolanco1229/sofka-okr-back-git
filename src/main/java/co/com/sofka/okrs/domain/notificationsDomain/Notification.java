@@ -11,9 +11,32 @@ public class Notification {
         String id;
         String userId;
         String notificationDescription;
+        String nameTitle;
         String okrId;
         String krId;
         Boolean viewed;
+
+        //IdUser
+        //Titulo P
+        //Porcentaje P
+        //Visto
+
+        public Notification(String userId, String notificationDescription, String okrId, Boolean viewed, String nameTitle) {
+                this.userId = userId;
+                this.notificationDescription = notificationDescription;
+                this.okrId = okrId;
+                this.viewed = viewed;
+                this.nameTitle = nameTitle;
+        }
+
+        public Notification(String userId, String notificationDescription, String okrId, String krId, Boolean viewed, String nameTitle) {
+                this.userId = userId;
+                this.notificationDescription = notificationDescription;
+                this.krId = krId;
+                this.okrId = okrId;
+                this.viewed = viewed;
+                this.nameTitle = nameTitle;
+        }
 
         public Notification(String id, String userId, String notificationDescription, String okrId, String krId, Boolean viewed) {
                 this.id = id;
@@ -78,5 +101,13 @@ public class Notification {
 
         public void setViewed(Boolean viewed) {
                 this.viewed = viewed;
+        }
+
+        public String getNameTitle() {
+                return nameTitle;
+        }
+
+        public void setNameTitle(String nameTitle) {
+                this.nameTitle = nameTitle;
         }
 }
