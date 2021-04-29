@@ -31,6 +31,10 @@ public class HistoricalAdvance {
         this.newAdvance = newAdvance;
     }
 
+    public void setDateUpdate(Date dateUpdate) {
+        this.dateUpdate = dateUpdate;
+    }
+
     public String getId() {
         return id;
     }
