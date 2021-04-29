@@ -40,4 +40,12 @@ class CalendarControllerTest {
                 .returnResult(Event.class)
                 .getResponseBody();
     }
+    @Test
+    void saveCalendarPrimaryCalendar() throws GeneralSecurityException, IOException {
+
+        webTestClient.post().uri("/calendar/save").contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .body(Mono.just(EventCalendar.DEFAULT_EVENT_CALENDAR), EventCalendar.class)
+                .exchange()
+                .expectStatus().isOk();
+    }
 }
