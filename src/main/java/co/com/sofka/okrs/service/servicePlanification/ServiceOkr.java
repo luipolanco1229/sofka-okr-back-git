@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Service
 public class ServiceOkr{
     @Autowired
@@ -20,19 +22,9 @@ public class ServiceOkr{
 
 
     public Mono<Okr> save(Okr okr) {
-        return repositoryOKr.save(okr);
+        return repositoryOKr.save(Objects.requireNonNull(okr));
     }
 
 
-    public Mono<Okr> update(Okr okr) {
-        repositoryOKr.findAll().filter(x -> x.getId() == okr.getId());{
-            repositoryOKr.deleteById(okr.getId());
-        }
-        return repositoryOKr.save(okr);
-    }
 
-
-    public Mono<Void> delete(String id) {
-        return repositoryOKr.deleteById(id);
-    }
 }
