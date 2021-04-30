@@ -11,8 +11,7 @@ public class HistoricalAdvance {
     private Date dateUpdate;
     private Double newAdvance;
 
-
-
+    
     public HistoricalAdvance(String id,Double newAdvance) {
         this.id = id;
         this.dateUpdate = new Date();

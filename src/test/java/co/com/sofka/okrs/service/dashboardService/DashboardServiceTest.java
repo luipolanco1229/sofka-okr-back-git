@@ -1,13 +1,10 @@
 package co.com.sofka.okrs.service.dashboardService;
 
 import co.com.sofka.okrs.TestUtils;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dto.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.*;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
-import co.com.sofka.okrs.service.dashboardService.DashboardService;
 import co.com.sofka.okrs.testHelpers.dashboardTestHelpers.TestHelpersDashboard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -155,7 +152,9 @@ class DashboardServiceTest {
     public void findAdvanceKrsByOkrId(){
         when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
         StepVerifier.create(dashboardService.findAdvanceKrsByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(24.0).expectNext(24.0).expectNext(32.0).verifyComplete();
+                expectNext(new PieKr("Alcanzar xxx ganancias", 24.0 ))
+                .expectNext(new PieKr("Alcanzar xxx desarrollos completados", 24.0 ))
+                .expectNext(new PieKr("Alcanzar xxx clientes nuevos", 32.0 )).verifyComplete();
     }
 
     @Test
@@ -164,6 +163,46 @@ class DashboardServiceTest {
 
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("xxxx"))
                 .expectComplete().verify();
+    }
+
+    @Test
+    public void generateBarChartData_errorExpected_NoOkrsRelated(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.error(new NullPointerException("There is not Okrs related to that Id")));
+
+        StepVerifier.create(dashboardService.generateBarChartData(okrId)).expectError().verify();
+    }
+
+    @Test
+    public void generateBarChartData_errorExpected_NoKrsRelated(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.error(new NullPointerException("There is not Okrs related to that Id")));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+        StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
+    }
+
+    @Test
+    public void generateBarChartData(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+        List<Double> expectedActualPercentage = List.of(0.0, 17.0, 17.0, 20.0, 20.0, 20.0, 20.0, 40.0);
+        List<Integer> expectedExpectedPercentage = List.of(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100);
+        List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
+        OkrBarChart chart = new OkrBarChart(expectedActualPercentage, expectedExpectedPercentage, expectedLabel);
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+        StepVerifier.create(dashboardService.generateBarChartData(okrId)).expectNext(chart).verifyComplete();
     }
 
 }
