@@ -1,10 +1,7 @@
 package co.com.sofka.okrs.controller.dashboardController;
 
 import co.com.sofka.okrs.domain.User;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
-import co.com.sofka.okrs.dto.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.*;
 import co.com.sofka.okrs.service.dashboardService.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,7 +43,7 @@ public class ControladorDashboard {
     }
 
     @GetMapping(value = "dashboard/okrAdvance/{id}")
-    public Mono<Float> findAdvanceOkrByOkrId(@PathVariable("id")String id){
+    public Mono<Double> findAdvanceOkrByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceOkrByOkrId(Objects.requireNonNull(id));
     }
 
@@ -55,9 +52,13 @@ public class ControladorDashboard {
         return dashboardService.generateBurnDownData(Objects.requireNonNull(id));
     }
     @GetMapping(value = "dashboard/krsAdvance/{id}")
-    public Flux<Float> findAdvanceKrsByOkrId(@PathVariable("id")String id){
+    public Flux<Double> findAdvanceKrsByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceKrsByOkrId(Objects.requireNonNull(id));
+    }
 
+    @GetMapping(value = "dashboard/barchart/{id}")
+    public Mono<OkrBarChart> generateBarChartDataByOkrId(@PathVariable("id") String id) {
+        return dashboardService.generateBarChartData(Objects.requireNonNull(id));
     }
 
 }

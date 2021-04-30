@@ -2,6 +2,7 @@ package co.com.sofka.okrs.controller.dashboardController;
 
 import co.com.sofka.okrs.TestUtils;
 import co.com.sofka.okrs.controller.dashboardController.ControladorDashboard;
+import co.com.sofka.okrs.dto.dashboard_dto.OkrBarChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
 import co.com.sofka.okrs.repository.RepositoryKr;
@@ -170,7 +171,7 @@ class ControladorDashboardTest {
 
         String okrId = TestHelpersDashboard.generate_okr().getId();
 
-        List<Float> expectedActualPercentage = List.of(100.0f, 83.0f, 83.0f, 80.0f, 80.0f, 80.0f, 80.0f, 60.0f);
+        List<Double> expectedActualPercentage = List.of(100.0, 83.0, 83.0, 80.0, 80.0, 80.0, 80.0, 60.0);
         List<Integer> expectedExpectedPercentage = List.of(100, 92, 84, 75, 67, 59, 50, 42, 34, 25, 17, 9, 0);
         List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
 
@@ -248,5 +249,72 @@ class ControladorDashboardTest {
 
         webTestClient.get().uri("/dashboard/krsAdvance/{id}", "xxxx")
                 .exchange().expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void generateBarChart(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        List<Double> expectedActualPercentage = List.of(0.0, 17.0, 17.0, 20.0, 20.0, 20.0, 20.0, 40.0);
+        List<Integer> expectedExpectedPercentage = List.of(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100);
+        List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
+
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+        webTestClient.get().uri("/dashboard/barchart/{id}", okrId)
+                .exchange()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectStatus()
+                .isOk()
+                .expectBody(OkrBarChart.class)
+                .consumeWith((okrBurnDownChartActual) -> {
+                    OkrBarChart okrBarChart = okrBurnDownChartActual.getResponseBody();
+                    Assertions.assertEquals(okrBarChart.getExpectedPercentage(), expectedExpectedPercentage);
+                    Assertions.assertEquals(okrBarChart.getLabels(), expectedLabel);
+                    Assertions.assertEquals(okrBarChart.getActualPercentage(), expectedActualPercentage);
+                });
+
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDateDesc(okrId);
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDate(okrId);
+        Mockito.verify(repositoryOKR, times(1)).findById(okrId);
+    }
+
+    @Test
+    void generateBarChart_ErrorExpected_NoOkrRelatedToId(){
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.error(new NullPointerException()));
+
+        webTestClient.get().uri("/dashboard/barchart/{id}", okrId)
+                .exchange().expectStatus().isEqualTo(404);
+
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDateDesc(okrId);
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDate(okrId);
+        Mockito.verify(repositoryOKR, times(1)).findById(okrId);
+    }
+
+    @Test
+    void generateBarChart_ErrorExpected_NoKrRelatedToId() {
+
+        String okrId = TestHelpersDashboard.generate_okr().getId();
+
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.error(new NullPointerException()));
+        when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.error(new NullPointerException()));
+        when(repositoryOKR.findById(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_okr()));
+
+
+        webTestClient.get().uri("/dashboard/barchart/{id}", okrId)
+                .exchange().expectStatus().isEqualTo(404);
+
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDateDesc(okrId);
+        Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDate(okrId);
+        Mockito.verify(repositoryOKR, times(1)).findById(okrId);
     }
 }
