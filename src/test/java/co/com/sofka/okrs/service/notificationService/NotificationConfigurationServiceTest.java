@@ -30,12 +30,4 @@ class NotificationConfigurationServiceTest {
          notificationConfigurationService = new NotificationConfigurationService();
     }
 
-    @Test
-    void consultConfig() {
-
-    }
-
-    @Test
-    void insertConfig() {
-    }
 }
