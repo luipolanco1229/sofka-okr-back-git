@@ -121,4 +121,21 @@ class AssemblerTest {
         Assertions.assertEquals(expectedExpectedPercentage, actualBurnDownData.getExpectedPercentage());
         Assertions.assertEquals(expectedLabel, actualBurnDownData.getLabels());
     }
+
+    @Test
+    public void generateBarChartData(){
+        Okr okr = TestHelpersDashboard.generate_okr();
+        Kr kr1 = TestHelpersDashboard.generate_kr1();
+        Kr kr2 = TestHelpersDashboard.generate_kr2();
+        Kr kr3 = TestHelpersDashboard.generate_kr3();
+
+        List<Double> expectedActualPercentage = List.of(0.0, 17.0, 17.0, 20.0, 20.0, 20.0, 20.0, 40.0);
+        List<Integer> expectedExpectedPercentage = List.of(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100);
+        List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
+        OkrBarChart actualbarChart = Assembler.generateBarChartData(okr, kr1, kr3);
+
+        Assertions.assertEquals(expectedActualPercentage, actualbarChart.getActualPercentage());
+        Assertions.assertEquals(expectedExpectedPercentage, actualbarChart.getExpectedPercentage());
+        Assertions.assertEquals(expectedLabel, actualbarChart.getLabels());
+    }
 }

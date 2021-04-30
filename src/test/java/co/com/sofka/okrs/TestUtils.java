@@ -82,7 +82,9 @@ public class TestUtils {
                 "6084801fb2ce1e4174af0245", "Elaborar contenido campus",
                 "Oscar Lopera", "oscar@gmail.com",
                 new Date(), new Date(),
-                50.0, 30.0, "Elaborar contenido campus sofka"));
+                50.0, 30., "Elaborar contenido campus sofka"));
+
+
         listaKr.add(new Kr("608810d15463112f24fd2593",
                 "6084801fb2ce1e4174af0245", "Planear Retos Sideralis",
                 "Oscar Lopera", "oscar@gmail.com",
