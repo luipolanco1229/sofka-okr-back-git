@@ -40,7 +40,7 @@ public class CalendarService {
         List<Event> list = calendarService.events().list("primary").execute().getItems();
         Flux<Event> eventFlux = Flux.fromIterable(list).map(event -> {
             Boolean band = false;
-            var list2 = event.getAttendees();
+            List<EventAttendee> list2 = event.getAttendees();
             for (EventAttendee eventAttendee: list2){
                 if(eventAttendee.getEmail().equals(email)){
                     band = true;
