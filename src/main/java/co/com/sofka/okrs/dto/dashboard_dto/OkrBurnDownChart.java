@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class OkrBurnDownChart {
 
-    private List<Float> actualPercentage;
+    private List<Double> actualPercentage;
     private List<Integer> expectedPercentage;
     private List<String> labels;
 
-    public OkrBurnDownChart(List<Float> actualPercentage, List<Integer> expectedPercentage, List<String> labels) {
+    public OkrBurnDownChart(List<Double> actualPercentage, List<Integer> expectedPercentage, List<String> labels) {
         this.actualPercentage = actualPercentage;
         this.expectedPercentage = expectedPercentage;
         this.labels = labels;
     }
 
-    public List<Float> getActualPercentage() {
+    public List<Double> getActualPercentage() {
         return actualPercentage;
     }
 

@@ -49,13 +49,13 @@ public class Assembler {
 
         List<String> labels = new ArrayList<>();
         List<Integer> expectedProgress = new ArrayList<>();
-        List<Float> actualProgress = new ArrayList<>();
+        List<Double> actualProgress = new ArrayList<>();
         LocalDate startingDate = convertDateToLocalDate(startingDateKr.getStartDate()).withDayOfMonth(28);
         List<HistoricalAdvance> historicalAdvance = okr.getHistoricalOkr();
 
         int okrDuration = calculateOkrDurationInMonths(startingDateKr.getStartDate(), finishingDateKr.getFinishDate());
         int historicalIndex = 0;
-        float tempPercentage = 0;
+        Double tempPercentage = 0.0;
         int historicalAdvanceLength = historicalAdvance.size() - 1;
 
 
@@ -80,7 +80,7 @@ public class Assembler {
         return historicalIndex < historicalAdvanceLength;
     }
 
-    private static float calculateActualProgress(float tempPercentage) {
+    private static Double calculateActualProgress(Double tempPercentage) {
         return 100 - tempPercentage;
     }
 

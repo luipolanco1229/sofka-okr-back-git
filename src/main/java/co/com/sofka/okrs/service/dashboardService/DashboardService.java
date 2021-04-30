@@ -42,12 +42,12 @@ public class DashboardService {
                 .onErrorResume(e->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
 
-    public Mono<Float> findAdvanceOkrByOkrId(String id){
+    public Mono<Double> findAdvanceOkrByOkrId(String id){
         return repositoryOKR.findById(id)
                 .map(Okr::getAdvanceOkr).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
 
-    public Flux<Float> findAdvanceKrsByOkrId(String id){
+    public Flux<Double> findAdvanceKrsByOkrId(String id){
         return  repositoryKr.findByOkrId(id).map(kr -> {
             kr.setAdvanceKr((kr.getAdvanceKr()*kr.getPercentageWeight())/100);
             return kr.getAdvanceKr();}).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));

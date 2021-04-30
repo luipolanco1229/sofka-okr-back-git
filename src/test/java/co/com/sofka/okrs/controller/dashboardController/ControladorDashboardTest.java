@@ -152,7 +152,7 @@ class ControladorDashboardTest {
 
         webTestClient.get().uri("/dashboard/okrAdvance/{id}", "6084801fb2ce1e4174af0245")
                 .exchange().expectStatus().isOk().expectBody()
-                .equals(0.68f);
+                .equals(68);
 
         Mockito.verify(repositoryOKR, times(1)).findById("6084801fb2ce1e4174af0245");
     }
@@ -170,10 +170,9 @@ class ControladorDashboardTest {
 
         String okrId = TestHelpersDashboard.generate_okr().getId();
 
-        List<Float> expectedActualPercentage = List.of(100.0f, 83.0f, 83.0f, 80.0f, 80.0f, 80.0f, 80.0f, 60.0f);
+        List<Double> expectedActualPercentage = List.of(100.0, 83.0, 83.0, 80.0, 80.0, 80.0, 80.0, 60.0);
         List<Integer> expectedExpectedPercentage = List.of(100, 92, 84, 75, 67, 59, 50, 42, 34, 25, 17, 9, 0);
         List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
-
 
         when(repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr3()));
         when(repositoryKr.findFirstByOkrIdOrderByFinishDate(okrId)).thenReturn(Mono.just(TestHelpersDashboard.generate_kr1()));
@@ -237,7 +236,7 @@ class ControladorDashboardTest {
 
         webTestClient.get().uri("/dashboard/krsAdvance/{id}", "6084801fb2ce1e4174af0245")
                 .exchange().expectStatus().isOk().expectBody()
-                .equals(24.0f);
+                .equals(24.0);
 
         Mockito.verify(repositoryKr, times(1)).findByOkrId("6084801fb2ce1e4174af0245");
     }

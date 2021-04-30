@@ -46,7 +46,7 @@ public class ControladorDashboard {
     }
 
     @GetMapping(value = "dashboard/okrAdvance/{id}")
-    public Mono<Float> findAdvanceOkrByOkrId(@PathVariable("id")String id){
+    public Mono<Double> findAdvanceOkrByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceOkrByOkrId(Objects.requireNonNull(id));
     }
 
@@ -55,7 +55,7 @@ public class ControladorDashboard {
         return dashboardService.generateBurnDownData(Objects.requireNonNull(id));
     }
     @GetMapping(value = "dashboard/krsAdvance/{id}")
-    public Flux<Float> findAdvanceKrsByOkrId(@PathVariable("id")String id){
+    public Flux<Double> findAdvanceKrsByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceKrsByOkrId(Objects.requireNonNull(id));
 
     }

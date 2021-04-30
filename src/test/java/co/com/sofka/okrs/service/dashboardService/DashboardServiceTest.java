@@ -62,9 +62,9 @@ class DashboardServiceTest {
         when(repositoryOKR.findByUserIdOrderByAdvanceOkrDesc("xxxx")).thenReturn(TestUtils.okrsByUser());
 
         StepVerifier.create(dashboardService.okrByUser("xxxx"))
-                .expectNext(new OkrList("o-xxxxx1", "Ganancias Trimestrales", 0.7f))
-                .expectNext(new OkrList("o-xxxxx3", "Clientes Trimestriales", 0.2f))
-                .expectNext(new OkrList("o-xxxxx2", "Desarrollos Trimestriales", 0f))
+                .expectNext(new OkrList("o-xxxxx1", "Ganancias Trimestrales", 70.0))
+                .expectNext(new OkrList("o-xxxxx3", "Clientes Trimestriales", 20.0))
+                .expectNext(new OkrList("o-xxxxx2", "Desarrollos Trimestriales", 0.0))
                 .verifyComplete();
     }
 
@@ -100,7 +100,7 @@ class DashboardServiceTest {
     public void findAdvanceOkrByOkrId(){
         when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(0.68f).verifyComplete();
+                expectNext(68.0).verifyComplete();
     }
 
     @Test
@@ -115,7 +115,7 @@ class DashboardServiceTest {
     public void generateBurnDownData(){
 
         String okrId = TestHelpersDashboard.generate_okr().getId();
-        List<Float> expectedActualPercentage = List.of(100.0f, 83.0f, 83.0f, 80.0f, 80.0f, 80.0f, 80.0f, 60.0f);
+        List<Double> expectedActualPercentage = List.of(100.0, 83.0, 83.0, 80.0, 80.0, 80.0, 80.0, 60.0);
         List<Integer> expectedExpectedPercentage = List.of(100, 92, 84, 75, 67, 59, 50, 42, 34, 25, 17, 9, 0);
         List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
         OkrBurnDownChart chart = new OkrBurnDownChart(expectedActualPercentage, expectedExpectedPercentage, expectedLabel);
@@ -151,12 +151,11 @@ class DashboardServiceTest {
         StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
     }
 
-
     @Test
     public void findAdvanceKrsByOkrId(){
         when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
         StepVerifier.create(dashboardService.findAdvanceKrsByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(24.0f).expectNext(24.0f).expectNext(32.0f).verifyComplete();
+                expectNext(24.0).expectNext(24.0).expectNext(32.0).verifyComplete();
     }
 
     @Test

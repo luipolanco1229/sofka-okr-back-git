@@ -46,9 +46,9 @@ class AssemblerTest {
                 "xxxx",
                 "Se desea alcanzar unas ganancias de xxx en el trimestre",
                 "Desarrollo",
-                0.7f,
+                70.0,
                 List.of());
-        OkrList okrListExpected = new OkrList("xxxx", "Ganancias Trimestrales", 0.7f);
+        OkrList okrListExpected = new OkrList("xxxx", "Ganancias Trimestrales", 70.0);
 
         OkrList okrListActual = Assembler.generateOkrList(okr);
 
@@ -65,7 +65,7 @@ class AssemblerTest {
                 "xxxx",
                 "Se desea alcanzar unas ganancias de xxx en el trimestre",
                 "Desarrollo",
-                0f,
+                0.0,
                 List.of());
 
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -112,7 +112,7 @@ class AssemblerTest {
         Kr kr2 = TestHelpersDashboard.generate_kr2();
         Kr kr3 = TestHelpersDashboard.generate_kr3();
 
-        List<Float> expectedActualPercentage = List.of(100.0f, 83.0f, 83.0f, 80.0f, 80.0f, 80.0f, 80.0f, 60.0f);
+        List<Double> expectedActualPercentage = List.of(100.0, 83.0, 83.0, 80.0, 80.0, 80.0, 80.0, 60.0);
         List<Integer> expectedExpectedPercentage = List.of(100, 92, 84, 75, 67, 59, 50, 42, 34, 25, 17, 9, 0);
         List<String> expectedLabel = List.of("01-20", "02-20", "03-20", "04-20","05-20", "06-20", "07-20", "08-20", "09-20", "10-20", "11-20", "12-20", "01-21");
         OkrBurnDownChart actualBurnDownData = Assembler.generateBurnDownData(okr, kr1, kr3);
