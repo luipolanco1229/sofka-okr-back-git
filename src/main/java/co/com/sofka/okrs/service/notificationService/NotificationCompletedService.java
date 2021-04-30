@@ -25,8 +25,6 @@ import java.util.List;
 
 @Service
 public class NotificationCompletedService {
-
-
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -57,7 +55,7 @@ public class NotificationCompletedService {
         dataCompletedOkr.add("Crear tarea");
         Float numero = 100F;
         dataCompletedOkr.add(numero.toString());
-        dataCompletedOkr.add("luipolanco1229@gmail.com");
+        dataCompletedOkr.add("sofka.okr@gmail.com");
         dataCompletedOkr.add("Luisa");
         Boolean boolean1= true;
         dataCompletedOkr.add(boolean1.toString());
@@ -66,23 +64,33 @@ public class NotificationCompletedService {
 
 
         return sendNotificationCompletedOkr(dataCompletedOkr);
-
     }
 
     private Mono<List> sendNotificationCompletedOkr(List<String> dataCompletedOkr) throws IOException {
         List<String> sendDataCompletedOkr = new ArrayList<>();
-        if (Float.parseFloat(dataCompletedOkr.get(2)) == 100 && Boolean.parseBoolean(dataCompletedOkr.get(5)) == true && Boolean.parseBoolean(dataCompletedOkr.get(6)) == true){
-            completedOkrEmail(dataCompletedOkr.get(3), dataCompletedOkr.get(4), dataCompletedOkr.get(1));
-            notification.setNotificationDescription("Haz completado el OKR" + dataCompletedOkr.get(1));
-            notification.setViewed(false);
-            repositoryNotification.save(new Notification("", dataCompletedOkr.get(0), notification.getNotificationDescription(),
-                    dataCompletedOkr.get(1),  notification.getViewed()));
-            sendDataCompletedOkr.add(dataCompletedOkr.get(1));
-            sendDataCompletedOkr.add(dataCompletedOkr.get(4));
-            return Mono.just(sendDataCompletedOkr);
+        if (Float.parseFloat(dataCompletedOkr.get(2)) == 100) {
+            if (Boolean.parseBoolean(dataCompletedOkr.get(5)) && Boolean.parseBoolean(dataCompletedOkr.get(6))) {
+                completedOkrEmail(dataCompletedOkr.get(3), dataCompletedOkr.get(4), dataCompletedOkr.get(1));
+                return sendNotificationScreenCompletedOkr(dataCompletedOkr, sendDataCompletedOkr);
 
+            } else if (!Boolean.parseBoolean(dataCompletedOkr.get(5)) && Boolean.parseBoolean(dataCompletedOkr.get(6))) {
+                completedOkrEmail(dataCompletedOkr.get(3), dataCompletedOkr.get(4), dataCompletedOkr.get(1));
+
+            } else if (Boolean.parseBoolean(dataCompletedOkr.get(5)) && !Boolean.parseBoolean(dataCompletedOkr.get(6))) {
+                return sendNotificationScreenCompletedOkr(dataCompletedOkr, sendDataCompletedOkr);
+            }
         }
         return Mono.empty();
+    }
+
+    private Mono<List> sendNotificationScreenCompletedOkr(List<String> dataCompletedOkr, List<String> sendDataCompletedOkr) {
+        notification.setNotificationDescription("Haz completado el OKR" + dataCompletedOkr.get(1));
+        notification.setViewed(false);
+        repositoryNotification.save(new Notification("", dataCompletedOkr.get(0), notification.getNotificationDescription(),
+                dataCompletedOkr.get(1), notification.getViewed()));
+        sendDataCompletedOkr.add(dataCompletedOkr.get(1));
+        sendDataCompletedOkr.add(dataCompletedOkr.get(4));
+        return Mono.just(sendDataCompletedOkr);
     }
 
 
@@ -108,7 +116,7 @@ public class NotificationCompletedService {
         Float numero = 100F;
         dataCompletedKr.add(numero.toString());
         dataCompletedKr.add("hjsr45nfd6h4nfd4");
-        dataCompletedKr.add("luipolanco1229@gmail.com");
+        dataCompletedKr.add("sofka.okr@gmail.com");
         dataCompletedKr.add("Luisa");
         Boolean boolean1= true;
         dataCompletedKr.add(boolean1.toString());
@@ -122,23 +130,31 @@ public class NotificationCompletedService {
 
 
 
-
-
-
-
     private Mono<List> sendNotificationCompletedKr(List<String> dataCompletedKr) throws IOException {
-        if (Float.parseFloat(dataCompletedKr.get(3)) == 100 && Boolean.parseBoolean(dataCompletedKr.get(7)) == true && Boolean.parseBoolean(dataCompletedKr.get(8)) == true){
-            List<String> sendDataCompletedKr = new ArrayList<>();
-            completedKrEmail(dataCompletedKr.get(5), dataCompletedKr.get(6), dataCompletedKr.get(1));
-            notification.setNotificationDescription("Haz completado este KR" + dataCompletedKr.get(1));
-            notification.setViewed(false);
-            repositoryNotification.save(new Notification("", dataCompletedKr.get(4), notification.getNotificationDescription(),
-                    dataCompletedKr.get(2), dataCompletedKr.get(1),  notification.getViewed() ));
-            sendDataCompletedKr.add(dataCompletedKr.get(1));
-            sendDataCompletedKr.add(dataCompletedKr.get(6));
-            return Mono.just(sendDataCompletedKr);
+        List<String> sendDataCompletedKr = new ArrayList<>();
+        if (Float.parseFloat(dataCompletedKr.get(3)) == 100) {
+            if (Boolean.parseBoolean(dataCompletedKr.get(7)) && Boolean.parseBoolean(dataCompletedKr.get(8))) {
+                completedKrEmail(dataCompletedKr.get(5), dataCompletedKr.get(6), dataCompletedKr.get(1));
+                return sendNotificationScreenCompletedKr(dataCompletedKr, sendDataCompletedKr);
+
+            } else if (!Boolean.parseBoolean(dataCompletedKr.get(7)) && Boolean.parseBoolean(dataCompletedKr.get(8))) {
+                completedKrEmail(dataCompletedKr.get(5), dataCompletedKr.get(6), dataCompletedKr.get(1));
+
+            } else if (Boolean.parseBoolean(dataCompletedKr.get(7)) && !Boolean.parseBoolean(dataCompletedKr.get(8))) {
+                return sendNotificationScreenCompletedKr(dataCompletedKr, sendDataCompletedKr);
+            }
         }
         return Mono.empty();
+    }
+
+    private Mono<List> sendNotificationScreenCompletedKr(List<String> dataCompletedKr, List<String> sendDataCompletedKr) {
+        notification.setNotificationDescription("Haz completado este KR" + dataCompletedKr.get(1));
+        notification.setViewed(false);
+        repositoryNotification.save(new Notification("", dataCompletedKr.get(4), notification.getNotificationDescription(),
+                dataCompletedKr.get(2), dataCompletedKr.get(1),  notification.getViewed() ));
+        sendDataCompletedKr.add(dataCompletedKr.get(1));
+        sendDataCompletedKr.add(dataCompletedKr.get(6));
+        return Mono.just(sendDataCompletedKr);
     }
 
 
@@ -163,11 +179,11 @@ public class NotificationCompletedService {
         }
     }
 
-    private void completedKrEmail(String email, String name, String title) throws IOException {
+    private void completedKrEmail(String email, String name, String keyResult) throws IOException {
         Email from = new Email("Sofka.OKR@gmail.com");
         Email to = new Email(email);
         String subject = "Haz completado un KR";
-        Content content = new Content("text/html", EmailCompletedKr.emailHtmlCompletedKr());
+        Content content = new Content("text/html", EmailCompletedKr.emailHtmlCompletedKr(name, keyResult ));
         Mail mail = new Mail(from, subject, to, content);
         Request request = new Request();
 

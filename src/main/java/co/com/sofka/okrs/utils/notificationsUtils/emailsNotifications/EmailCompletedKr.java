@@ -1,7 +1,7 @@
 package co.com.sofka.okrs.utils.notificationsUtils.emailsNotifications;
 
 public class EmailCompletedKr {
-    public static String emailHtmlCompletedKr(){
+    public static String emailHtmlCompletedKr(String name, String keyResult){
         return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n" +
                 "<html data-editor-version=\"2\" class=\"sg-campaigns\" xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "    <head>\n" +
@@ -168,9 +168,9 @@ public class EmailCompletedKr {
                 "  </table><table class=\"module\" role=\"module\" data-type=\"text\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"table-layout: fixed;\" data-muid=\"561d367b-342f-4580-aa49-ab2eb007e5d2\" data-mc-module-version=\"2019-10-22\">\n" +
                 "    <tbody>\n" +
                 "      <tr>\n" +
-                "        <td style=\"padding:18px 15px 18px 15px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: center\"><span style=\"font-size: 18px; color: #f0950e\">(Nombre usuario)</span></div>\n" +
+                "        <td style=\"padding:18px 15px 18px 15px; line-height:22px; text-align:inherit;\" height=\"100%\" valign=\"top\" bgcolor=\"\" role=\"module-content\"><div><div style=\"font-family: inherit; text-align: center\"><span style=\"font-size: 18px; color: #f0950e\">"+name+"</span></div>\n" +
                 "<div style=\"font-family: inherit; text-align: center\"><br></div>\n" +
-                "<h4 style=\"text-align: center\"><span style=\"font-size: 24px\"><strong>Completaste tu KR ( nombre KR)&nbsp;</strong></span></h4>\n" +
+                "<h4 style=\"text-align: center\"><span style=\"font-size: 24px\"><strong>Completaste tu KR "+keyResult+"&nbsp;</strong></span></h4>\n" +
                 "<div style=\"font-family: inherit; text-align: center\"><br></div>\n" +
                 "<h3 style=\"text-align: center\"><span style=\"font-size: 18px; color: #565656\"><strong>¡Felicidades!&nbsp;</strong></span></h3>\n" +
                 "<div style=\"font-family: inherit; text-align: center\"><br></div>\n" +
