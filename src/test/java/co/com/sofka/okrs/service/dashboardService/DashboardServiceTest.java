@@ -1,10 +1,7 @@
 package co.com.sofka.okrs.service.dashboardService;
 
 import co.com.sofka.okrs.TestUtils;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrBarChart;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dto.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.*;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
@@ -155,7 +152,9 @@ class DashboardServiceTest {
     public void findAdvanceKrsByOkrId(){
         when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
         StepVerifier.create(dashboardService.findAdvanceKrsByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(24.0).expectNext(24.0).expectNext(32.0).verifyComplete();
+                expectNext(new PieKr("Alcanzar xxx ganancias", 24.0 ))
+                .expectNext(new PieKr("Alcanzar xxx desarrollos completados", 24.0 ))
+                .expectNext(new PieKr("Alcanzar xxx clientes nuevos", 32.0 )).verifyComplete();
     }
 
     @Test

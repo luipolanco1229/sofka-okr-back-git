@@ -52,7 +52,7 @@ public class ControladorDashboard {
         return dashboardService.generateBurnDownData(Objects.requireNonNull(id));
     }
     @GetMapping(value = "dashboard/krsAdvance/{id}")
-    public Flux<Double> findAdvanceKrsByOkrId(@PathVariable("id")String id){
+    public Flux<PieKr> findAdvanceKrsByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceKrsByOkrId(Objects.requireNonNull(id));
     }
 

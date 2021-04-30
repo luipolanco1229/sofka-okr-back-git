@@ -5,6 +5,7 @@ import co.com.sofka.okrs.controller.dashboardController.ControladorDashboard;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrBarChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrBurnDownChart;
 import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
+import co.com.sofka.okrs.dto.dashboard_dto.PieKr;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
@@ -231,13 +232,17 @@ class ControladorDashboardTest {
         Mockito.verify(repositoryKr, times(1)).findFirstByOkrIdOrderByFinishDate(okrId);
         Mockito.verify(repositoryOKR, times(1)).findById(okrId);
     }
+
     @Test
     public void findAdvanceKrsByOkrId(){
         when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());
 
-        webTestClient.get().uri("/dashboard/krsAdvance/{id}", "6084801fb2ce1e4174af0245")
-                .exchange().expectStatus().isOk().expectBody()
-                .equals(24.0);
+        Flux<PieKr> pieKrFlux = webTestClient.get().uri("/dashboard/krsAdvance/{id}", "6084801fb2ce1e4174af0245")
+                .header(HttpHeaders.ACCEPT, "application/json")
+                .exchange()
+                .expectStatus().isOk().returnResult(PieKr.class).getResponseBody();
+
+        StepVerifier.create(pieKrFlux).expectNextCount(3).verifyComplete();
 
         Mockito.verify(repositoryKr, times(1)).findByOkrId("6084801fb2ce1e4174af0245");
     }
