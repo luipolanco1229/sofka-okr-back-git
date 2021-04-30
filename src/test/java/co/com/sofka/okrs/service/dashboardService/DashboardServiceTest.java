@@ -151,7 +151,6 @@ class DashboardServiceTest {
         StepVerifier.create(dashboardService.generateBurnDownData(okrId)).expectError().verify();
     }
 
-
     @Test
     public void findAdvanceKrsByOkrId(){
         when(repositoryKr.findByOkrId("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getFluxKr());

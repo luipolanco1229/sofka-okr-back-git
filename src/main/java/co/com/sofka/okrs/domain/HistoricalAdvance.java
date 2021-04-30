@@ -13,7 +13,10 @@ public class HistoricalAdvance {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d224157f8de5c269cc4963669784e8bf9d235aa3
     public HistoricalAdvance(String id,Double newAdvance) {
         this.id = id;
         this.dateUpdate = new Date();

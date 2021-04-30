@@ -8,7 +8,6 @@ import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.domain.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +83,8 @@ public class TestUtils {
                 "Oscar Lopera", "oscar@gmail.com",
                 new Date(), new Date(),
                 50.0, 30., "Elaborar contenido campus sofka"));
+
+
         listaKr.add(new Kr("608810d15463112f24fd2593",
                 "6084801fb2ce1e4174af0245", "Planear Retos Sideralis",
                 "Oscar Lopera", "oscar@gmail.com",

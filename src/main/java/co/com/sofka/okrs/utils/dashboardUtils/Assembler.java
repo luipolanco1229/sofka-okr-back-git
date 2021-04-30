@@ -110,7 +110,8 @@ public class Assembler {
         return historicalIndex < historicalAdvanceLength;
     }
 
-    private static Double calculateActualProgress(double tempPercentage) {
+
+    private static Double calculateActualProgress(Double tempPercentage) {
         return 100 - tempPercentage;
     }
 
