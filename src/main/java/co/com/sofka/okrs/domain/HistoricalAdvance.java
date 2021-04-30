@@ -9,11 +9,12 @@ public class HistoricalAdvance {
     @Id
     private String id;
     private Date dateUpdate;
-    private Float newAdvance;
+    private Double newAdvance;
 
 
 
-    public HistoricalAdvance(String id,Float newAdvance) {
+
+    public HistoricalAdvance(String id,Double newAdvance) {
         this.id = id;
         this.dateUpdate = new Date();
         this.newAdvance = newAdvance;
@@ -23,11 +24,11 @@ public class HistoricalAdvance {
         return dateUpdate;
     }
 
-    public Float getNewAdvance() {
+    public Double getNewAdvance() {
         return newAdvance;
     }
 
-    public void setNewAdvance(Float newAdvance) {
+    public void setNewAdvance(Double newAdvance) {
         this.newAdvance = newAdvance;
     }
 
