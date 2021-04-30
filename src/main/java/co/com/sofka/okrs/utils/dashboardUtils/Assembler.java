@@ -5,7 +5,6 @@ import co.com.sofka.okrs.dto.dashboard_dto.*;
 import co.com.sofka.okrs.domain.Kr;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.domain.User;
-import jdk.vm.ci.meta.Local;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -49,13 +48,13 @@ public class Assembler {
 
         List<String> labels = new ArrayList<>();
         List<Integer> expectedProgress = new ArrayList<>();
-        List<Float> actualProgress = new ArrayList<>();
+        List<Double> actualProgress = new ArrayList<>();
         LocalDate startingDate = convertDateToLocalDate(startingDateKr.getStartDate()).withDayOfMonth(28);
         List<HistoricalAdvance> historicalAdvance = okr.getHistoricalOkr();
 
         int okrDuration = calculateOkrDurationInMonths(startingDateKr.getStartDate(), finishingDateKr.getFinishDate());
         int historicalIndex = 0;
-        float tempPercentage = 0;
+        Double tempPercentage = 0.0;
         int historicalAdvanceLength = historicalAdvance.size() - 1;
 
 
@@ -76,11 +75,42 @@ public class Assembler {
          return new OkrBurnDownChart(actualProgress, expectedProgress, labels);
     }
 
+    public static OkrBarChart generateBarChartData(Okr okr, Kr startingDateKr, Kr finishingDateKr){
+
+        List<String> labels = new ArrayList<>();
+        List<Integer> expectedProgress = new ArrayList<>();
+        List<Double> actualProgress = new ArrayList<>();
+        LocalDate startingDate = convertDateToLocalDate(startingDateKr.getStartDate()).withDayOfMonth(28);
+        List<HistoricalAdvance> historicalAdvance = okr.getHistoricalOkr();
+
+        int okrDuration = calculateOkrDurationInMonths(startingDateKr.getStartDate(), finishingDateKr.getFinishDate());
+        int historicalIndex = 0;
+        Double tempPercentage = 0.0;
+        int historicalAdvanceLength = historicalAdvance.size() - 1;
+
+
+        for(int i = 0; hasNotOkrFinished(okrDuration, i); i++){
+            LocalDate nextAdvanceDate = convertDateToLocalDate(historicalAdvance.get(historicalIndex).getDateUpdate());
+
+            if(isAfterOrEquals(startingDate.plusMonths(i), nextAdvanceDate)){
+                tempPercentage = historicalAdvance.get(historicalIndex).getNewAdvance();
+                historicalIndex = isIndexOnBounds(historicalIndex, historicalAdvanceLength) ? historicalIndex +=1 : historicalIndex;
+            }
+            if(isBeforeOrEquals(startingDate.plusMonths(i - 1), nextAdvanceDate)){
+                actualProgress.add(tempPercentage);
+            }
+            labels.add(startingDate.plusMonths(i).format(DateTimeFormatter.ofPattern("MM-yy")));
+            expectedProgress.add(100);
+        }
+
+        return new OkrBarChart(actualProgress, expectedProgress, labels);
+    }
+
     private static boolean isIndexOnBounds(int historicalIndex, int historicalAdvanceLength) {
         return historicalIndex < historicalAdvanceLength;
     }
 
-    private static float calculateActualProgress(float tempPercentage) {
+    private static Double calculateActualProgress(double tempPercentage) {
         return 100 - tempPercentage;
     }
 
