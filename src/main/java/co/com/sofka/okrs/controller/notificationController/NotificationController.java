@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/notifications")
+@CrossOrigin("*")
 public class NotificationController {
 @Autowired
     NotificationConfigurationService notificationConfigurationService;
@@ -31,9 +32,8 @@ public class NotificationController {
         return notificationCompletedService.completedKr(id);
     }
 
-    @GetMapping("/consultConfig/{id}")
-    public Mono<User> ConsultConfig(@PathVariable String id){ return notificationConfigurationService.ConsultConfig(id);}
-
+    @GetMapping("/consultConfig/{correo}")
+    public Flux<User> ConsultConfig(@PathVariable String correo){ return notificationConfigurationService.ConsultConfig(correo);}
     @PostMapping("/insertConfig")
     public Mono<User> InsertConfig(@RequestBody User user){return Mono.empty(); }
 
